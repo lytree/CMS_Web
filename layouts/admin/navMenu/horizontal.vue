@@ -16,7 +16,7 @@
               {{ $t(val.meta.title) }}
             </template>
             <template #title v-else>
-              <a class="w100" @click.prevent="onALinkClick(val)">
+              <a class="w-full" @click.prevent="onALinkClick(val)">
                 <SvgIcon :name="val.meta.icon" />
                 {{ $t(val.meta.title) }}
               </a>
@@ -28,7 +28,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="navMenuHorizontal">
+<script setup lang="ts">
 import { defineAsyncComponent, reactive, computed, onBeforeMount } from 'vue'
 import { useRoute, onBeforeRouteUpdate, RouteRecordRaw } from 'vue-router'
 import { storeToRefs } from 'pinia'
@@ -60,11 +60,9 @@ const state = reactive({
 })
 
 // 获取父级菜单数据
-const menuLists = computed(() => {
-  return <RouteItems>props.menuList
-})
+const menuLists = computed(() => <RouteItems>props.menuList)
 // 路由过滤递归函数
-const filterRoutesFun = <T extends RouteItem>(arr: T[]): T[] => {
+const filterRoutesFun = <T extends RouteItem>(arr: T[]): T[]  => {
   return arr
     .filter((item: T) => !item.meta?.isHide)
     .map((item: T) => {
@@ -124,12 +122,15 @@ onBeforeRouteUpdate((to) => {
   overflow: hidden;
   margin-right: 30px;
 }
+
 .el-menu-horizontal-warp :deep(.el-scrollbar__bar.is-vertical) {
   display: none;
 }
+
 .el-menu-horizontal-warp :deep(a) {
   width: 100%;
 }
+
 .el-menu-horizontal-warp .el-menu.el-menu--horizontal {
   display: flex;
   height: 100%;

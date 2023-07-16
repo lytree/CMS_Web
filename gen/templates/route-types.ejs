@@ -10,9 +10,9 @@ import { <%~ dataContracts.join(", ") %> } from "./<%~ config.fileNames.dataCont
 <% } %>
 
 export namespace <%~ pascalCase(moduleName) %> {
-    <% _.forEach(routes, (route) => { %>
+    <% for (const route of routes) { %>
 
         <%~ includeFile('./route-type.ejs', { ...it, route }) %>
 
-    <% }) %>
+    <% } %>
 }

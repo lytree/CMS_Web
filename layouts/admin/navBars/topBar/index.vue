@@ -9,7 +9,8 @@ import mittBus from '@/utils/mitt'
 // 引入组件
 const Breadcrumb = defineAsyncComponent(() => import('@/layouts/admin/navBars/topBar/breadcrumb.vue'))
 const User = defineAsyncComponent(() => import('@/layouts/admin/navBars/topBar/user.vue'))
-
+const Horizontal = defineAsyncComponent(() => import('@/layouts/admin/navMenu/horizontal.vue'))
+const Logo = defineAsyncComponent(() => import('@/layouts/admin/logo/index.vue'))
 // 定义变量内容
 const stores = useRoutesList()
 const storesThemeConfig = useThemeConfig()
@@ -25,12 +26,11 @@ const setBreadcrumbStyle = computed(() => {
   const bgTheme = ['#FFFFFF', '#FFF', '#fff', '#ffffff']
   return [bgTheme.includes(topBar) ? '' : 'layout-navbars-breadcrumb-index-no-bb']
 })
-
 // 设置 logo 显示/隐藏
-// const setIsShowLogo = computed(() => {
-//   const { isShowLogo, layout } = themeConfig.value
-//   return (isShowLogo && layout === 'classic') || (isShowLogo && layout === 'transverse')
-// })
+const setIsShowLogo = computed(() => {
+  const { isShowLogo, layout } = themeConfig.value
+  return (isShowLogo && layout === 'classic') || (isShowLogo && layout === 'transverse')
+})
 // 设置/过滤路由（非静态路由/是否显示在菜单中）
 function setFilterRoutes() {
   const { layout, isClassicSplitMenu } = themeConfig.value
@@ -86,13 +86,15 @@ onMounted(() => {
 })
 // 页面卸载时
 onUnmounted(() => {
-  mittBus.off('getBreadcrumbIndexSetFilterRoutes', () => {})
+  mittBus.off('getBreadcrumbIndexSetFilterRoutes', () => { })
 })
 </script>
 
 <template>
   <div class="layout-navbars-breadcrumb-index" :class="setBreadcrumbStyle">
+    <Logo v-if="setIsShowLogo" />
     <Breadcrumb />
+    <Horizontal :menu-list="state.menuList" />
     <User />
   </div>
 </template>
@@ -105,6 +107,7 @@ onUnmounted(() => {
   background: var(--next-bg-topBar);
   border-bottom: 1px solid var(--next-border-color-light);
 }
+
 .layout-navbars-breadcrumb-index-no-bb {
   border-bottom-width: 0px;
 }

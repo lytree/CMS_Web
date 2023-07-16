@@ -6,14 +6,14 @@ const routes = route.routes;
 const dataContracts = _.map(modelTypes, "name");
 %>
 
-<% if (config.httpClientType === config.constants.HTTP_CLIENT.AXIOS) { %> import { AxiosRequestConfig, AxiosResponse } from "axios"; <% } %>
+<% if (config.httpClientType === config.constants.HTTP_CLIENT.AXIOS) { %> import type { AxiosRequestConfig, AxiosResponse } from "axios"; <% } %>
 
 import { HttpClient, RequestParams, ContentType, HttpResponse } from "./<%~ config.fileNames.httpClient %>";
 <% if (dataContracts.length) { %>
 import { <%~ dataContracts.join(", ") %> } from "./<%~ config.fileNames.dataContracts %>"
 <% } %>
 
-export class <%= apiClassName %>Api<SecurityDataType = unknown><% if (!config.singleHttpClient) { %> extends HttpClient<SecurityDataType> <% } %> {
+export class <%= apiClassName %><SecurityDataType = unknown><% if (!config.singleHttpClient) { %> extends HttpClient<SecurityDataType> <% } %> {
 <% if(config.singleHttpClient) { %>
   http: HttpClient<SecurityDataType>;
 
@@ -22,7 +22,7 @@ export class <%= apiClassName %>Api<SecurityDataType = unknown><% if (!config.si
   }
 <% } %>
 
-    <% routes.forEach((route) => { %>
+    <% for (const route of routes) { %>
         <%~ includeFile('./procedure-call.ejs', { ...it, route }) %>
-    <% }) %>
+    <% } %>
 }

@@ -1,6 +1,13 @@
-import { resolve } from 'node:path'
-import { generateApi } from 'swagger-typescript-api'
+// 最新 node 核心包的导入写法
+import { fileURLToPath } from 'node:url'
+import { dirname, resolve } from 'node:path'
+import pkg from 'swagger-typescript-api'
 
+// 获取 __filename 的 ESM 写法
+const __filename = fileURLToPath(import.meta.url)
+// 获取 __dirname 的 ESM 写法
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const { generateApi } = pkg
 // const fs = require('fs')
 
 const apis = [
@@ -23,7 +30,7 @@ apis?.forEach((api, index) => {
       moduleNameFirstTag: true, // apis htt-client data-contracts
       unwrapResponseData: true,
       generateUnionEnums: true,
-      defaultResponseType: 'AxiosResponse',
+      defaultResponseType: 'FetchResponse',
       // hooks: {
       //   onFormatTypeName: (typeName, rawTypeName, schemaType) => {
 

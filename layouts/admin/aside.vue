@@ -172,7 +172,7 @@ watch(
 <template>
   <div v-show="!isTagsViewCurrenFull" class="h-full">
     <el-aside class="layout-aside" :class="setCollapseStyle">
-      <Logo />
+      <Logo v-if="setShowLogo"/>
       <el-scrollbar ref="layoutAsideScrollbarRef" class="flex-auto overflow-hidden" @mouseenter="onAsideEnterLeave(true)" @mouseleave="onAsideEnterLeave(false)">
         <Vertical :menu-list="state.menuList" />
       </el-scrollbar>

@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-navbars-breadcrumb">
+  <div v-if="isShowBreadcrumb" class="layout-navbars-breadcrumb">
     <SvgIcon
       class="layout-navbars-breadcrumb-icon"
       :name="themeConfig.isCollapse ? 'ele-Expand' : 'ele-Fold'"
@@ -46,13 +46,13 @@ const state = reactive<BreadcrumbState>({
   routeSplitIndex: 1,
 })
 
-// // 动态设置经典、横向布局不显示
-// const isShowBreadcrumb = computed(() => {
-//   initRouteSplit(route.path)
-//   const { layout, isBreadcrumb } = themeConfig.value
-//   if (layout === 'classic' || layout === 'transverse') return false
-//   else return isBreadcrumb ? true : false
-// })
+// 动态设置经典、横向布局不显示
+const isShowBreadcrumb = computed(() => {
+  initRouteSplit(route.path)
+  const { layout, isBreadcrumb } = themeConfig.value
+  if (layout === 'classic' || layout === 'transverse') return false
+  else return isBreadcrumb ? true : false
+})
 // 面包屑点击时
 const onBreadcrumbClick = (v: RouteItem) => {
   const { redirect, path } = v

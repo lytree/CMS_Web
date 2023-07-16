@@ -28,78 +28,78 @@ const storesThemeConfig = useThemeConfig()
 const { themeConfig } = storeToRefs(storesThemeConfig)
 other.elSvg(nuxtApp)
 useHead({
-    title: appName,
+  title: appName,
 })
 
 // 设置锁屏时组件显示隐藏
 const getLockScreen = computed(() => {
-    // 防止锁屏后，刷新出现不相关界面
-    return themeConfig.value.isLockScreen ? themeConfig.value.lockScreenTime > 1 : themeConfig.value.lockScreenTime >= 0
+  // 防止锁屏后，刷新出现不相关界面
+  return themeConfig.value.isLockScreen ? themeConfig.value.lockScreenTime > 1 : themeConfig.value.lockScreenTime >= 0
 })
 
 
 // 获取全局 i18n
 const getGlobalI18n = computed(() => {
-    return messages.value[locale.value]
+  return messages.value[locale.value]
 })
 // 页面加载时
 onMounted(() => {
-    nextTick(() => {
-        // 监听布局配'置弹窗点击打开
-        mittBus.on('openSetingsDrawer', () => {
-            setingsRef.value.openDrawer()
-        })
-        // 获取缓存中的布局配置
-        if (Local.get('themeConfig')) {
-            storesThemeConfig.setThemeConfig({ themeConfig: Local.get('themeConfig') })
-            document.documentElement.style.cssText = Local.get('themeConfigStyle')
-        }
-        // 获取缓存中的全屏配置
-        if (Session.get('isTagsViewCurrenFull')) {
-            stores.setCurrenFullscreen(Session.get('isTagsViewCurrenFull'))
-        }
+  nextTick(() => {
+    // 监听布局配'置弹窗点击打开
+    mittBus.on('openSetingsDrawer', () => {
+      setingsRef.value.openDrawer()
     })
+    // 获取缓存中的布局配置
+    if (Local.get('themeConfig')) {
+      storesThemeConfig.setThemeConfig({ themeConfig: Local.get('themeConfig') })
+      document.documentElement.style.cssText = Local.get('themeConfigStyle')
+    }
+    // 获取缓存中的全屏配置
+    if (Session.get('isTagsViewCurrenFull')) {
+      stores.setCurrenFullscreen(Session.get('isTagsViewCurrenFull'))
+    }
+  })
 })
 // 页面销毁时，关闭监听布局配置/i18n监听
 onUnmounted(() => {
-    mittBus.off('openSetingsDrawer', () => { })
+  mittBus.off('openSetingsDrawer', () => { })
 })// 监听路由的变化，设置网站标题
 watch(
-    () => route.path,
-    () => {
-        other.useTitle()
-    },
-    {
-        deep: true,
-    }
+  () => route.path,
+  () => {
+    other.useTitle()
+  },
+  {
+    deep: true,
+  }
 )
 </script>
 
 <template>
-    <el-config-provider :locale="getGlobalI18n">
-        <NuxtLoadingIndicator :height="5" :duration="3000" :throttle="400" /> <!-- I'm here -->
-        <NuxtPage />
-        <Setings ref="setingsRef" v-show="getLockScreen" />
-        <CloseFull v-if="!themeConfig.isLockScreen" />
-    </el-config-provider>
+  <el-config-provider :locale="getGlobalI18n">
+    <NuxtLoadingIndicator :height="5" :duration="3000" :throttle="400" /> <!-- I'm here -->
+    <NuxtPage />
+    <Setings ref="setingsRef" v-show="getLockScreen" />
+    <CloseFull v-if="!themeConfig.isLockScreen" />
+  </el-config-provider>
 </template>
 
 <style>
 html,
 body,
 #__nuxt {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 html.dark {
-    background: #101014;
-    color: white;
+  background: #101014;
+  color: white;
 }
 
 html.light {
-    background: #f6f9f8;
-    color: black;
+  background: #f6f9f8;
+  color: black;
 }
 </style>
