@@ -5,6 +5,7 @@ import { appName } from '~/constants'
 import '@/assets/theme/index.css'
 import mittBus from '@/utils/mitt'
 import other from '@/utils/other'
+import setIntroduction from '@/utils/setIconfont'
 import { useTagsViewRoutes } from '@/stores/tagsViewRoutes'
 import { useThemeConfig } from '@/stores/themeConfig'
 
@@ -41,6 +42,13 @@ const getLockScreen = computed(() => {
 // 获取全局 i18n
 const getGlobalI18n = computed(() => {
   return messages.value[locale.value]
+})
+// 设置初始化，防止刷新时恢复默认
+onBeforeMount(() => {
+  // 设置批量第三方 icon 图标
+  setIntroduction.cssCdn()
+  // 设置批量第三方 js
+  setIntroduction.jsCdn()
 })
 // 页面加载时
 onMounted(() => {

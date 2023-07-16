@@ -1,12 +1,10 @@
 import { defineAsyncComponent, nextTick } from 'vue'
-import type { App } from 'vue'
 import * as svg from '@element-plus/icons-vue'
 import { storeToRefs } from 'pinia'
 import type { NuxtApp } from 'nuxt/app'
 import { useThemeConfig } from '@/stores/themeConfig'
 import { Local } from '@/utils/storage'
 import { verifyUrl } from '@/utils/toolsValidate'
-
 // 引入组件
 const SvgIcon = defineAsyncComponent(() => import('@/components/svgIcon/index.vue'))
 
@@ -28,17 +26,17 @@ export function elSvg(app: NuxtApp) {
  * @method const title = useTitle(); ==> title()
  */
 export function useTitle() {
-  const stores = useThemeConfig(pinia)
+  const stores = useThemeConfig(usePinia())
   const { themeConfig } = storeToRefs(stores)
   nextTick(() => {
     let webTitle = ''
     const globalTitle: string = themeConfig.value.globalTitle
-    const { path, meta } = router.currentRoute.value
+    const { path, meta } = useRouter().currentRoute.value
     if (path === '/login')
       webTitle = <string>meta.title
 
     else
-      webTitle = setTagsViewNameI18n(router.currentRoute.value)
+      webTitle = setTagsViewNameI18n(useRouter().currentRoute.value)
 
     document.title = `${webTitle} - ${globalTitle}` || globalTitle
   })
@@ -58,7 +56,7 @@ export function setTagsViewNameI18n(item: any) {
     if (pattern.test(query?.tagsViewName) || pattern.test(params?.tagsViewName)) {
       // 国际化
       const urlTagsParams = (query?.tagsViewName && JSON.parse(query?.tagsViewName)) || (params?.tagsViewName && JSON.parse(params?.tagsViewName))
-      tagsViewName = urlTagsParams[i18n.global.locale.value]
+      tagsViewName = urlTagsParams[useI18n().locale.value]
     }
     else {
       // 非国际化
@@ -68,7 +66,7 @@ export function setTagsViewNameI18n(item: any) {
   else {
     // 非自定义 tagsView 名称
     if (meta.title)
-      tagsViewName = i18n.global.t(meta.title)
+      tagsViewName = useI18n().t(meta.title)
   }
   return tagsViewName
 }
@@ -102,7 +100,7 @@ export function lazyImg(el: string, arr: EmptyArrayType) {
  * @returns 返回 `window.localStorage` 中读取的缓存值 `globalComponentSize`
  */
 export function globalComponentSize(): string {
-  const stores = useThemeConfig(pinia)
+  const stores = useThemeConfig(usePinia())
   const { themeConfig } = storeToRefs(stores)
   return Local.get('themeConfig')?.globalComponentSize || themeConfig.value?.globalComponentSize
 }
@@ -170,11 +168,11 @@ export function handleEmpty(list: EmptyArrayType) {
  * @param val 当前点击项菜单
  */
 export function handleOpenLink(val: RouteItem) {
-  const stores = useThemeConfig(pinia)
+  const stores = useThemeConfig(usePinia())
   const { themeConfig } = storeToRefs(stores)
 
   const { origin, pathname } = window.location
-  router.push(val.path)
+  useRouter().push(val.path)
   if (verifyUrl(<string>val.meta?.isLink))
     window.open(val.meta?.isLink)
   else themeConfig.value.isCreateWebHistory ? window.open(`${origin}${val.meta?.isLink}`) : window.open(`${origin}${pathname}#${val.meta?.isLink}`)
