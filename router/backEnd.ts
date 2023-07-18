@@ -1,9 +1,6 @@
-import type { RouteRecordRaw } from 'vue-router'
 import { useUserInfo } from '@/stores/userInfo'
 import { useRequestOldRoutes } from '@/stores/requestOldRoutes'
 import { NextLoading } from '@/utils/loading'
-import {  notFoundAndNoPower } from '@/router/route'
-import { formatFlatteningRoutes, formatTwoStageRoutes } from '@/router/index'
 import { useRoutesList } from '@/stores/routesList'
 import { useTagsViewRoutes } from '@/stores/tagsViewRoutes'
 
@@ -23,6 +20,7 @@ import { listToTree } from '@/utils/tree'
  */
 const layouModules: any = import.meta.glob('../layout/routerView/*.{vue,tsx}')
 const viewsModules: any = import.meta.glob('../views/**/*.{vue,tsx}')
+// eslint-disable-next-line @typescript-eslint/ban-types
 const dynamicViewsModules: Record<string, Function> = Object.assign({}, { ...layouModules }, { ...viewsModules })
 
 /**
@@ -50,17 +48,8 @@ export async function initBackEndControlRoutes() {
   useRequestOldRoutes().setRequestOldRoutes(JSON.parse(JSON.stringify(menus)))
   // 处理路由（component），替换 dynamicRoutes（/@/router/route）第一个顶级 children 的路由
   const routes = await backEndComponent(menus)
-  const isIncludeExample = true
-  if (isIncludeExample) {
-    // 包含样例
-    dynamicRoutes[0].children?.unshift(...routes)
-  }
-  else {
-    dynamicRoutes[0].children = routes
-  }
-
   // 添加动态路由
-  await setAddRoute()
+  // await setAddRoute()
   // 设置路由到 pinia routesList 中（已处理成多级嵌套路由）及缓存多级嵌套数组处理后的一维数组
   setFilterMenuAndCacheTagsViewRoutes()
 }
@@ -71,8 +60,8 @@ export async function initBackEndControlRoutes() {
  * @description 用于 tagsView、菜单搜索中：未过滤隐藏的(isHide)
  */
 export function setFilterMenuAndCacheTagsViewRoutes() {
-  const storesRoutesList = useRoutesList(pinia)
-  storesRoutesList.setRoutesList(dynamicRoutes[0].children as any)
+  const storesRoutesList = useRoutesList(usePinia())
+  // storesRoutesList.setRoutesList(dynamicRoutes[0].children as any)
   setCacheTagsViewRoutes()
 }
 
@@ -81,34 +70,35 @@ export function setFilterMenuAndCacheTagsViewRoutes() {
  * @description 用于 tagsView、菜单搜索中：未过滤隐藏的(isHide)
  */
 export function setCacheTagsViewRoutes() {
-  const storesTagsView = useTagsViewRoutes(pinia)
-  storesTagsView.setTagsViewRoutes(formatTwoStageRoutes(formatFlatteningRoutes(dynamicRoutes))[0].children)
+  const storesTagsView = useTagsViewRoutes(usePinia())
+  console.log(storesTagsView.tagsViewRoutes)
+  // storesTagsView.setTagsViewRoutes(formatTwoStageRoutes(formatFlatteningRoutes(dynamicRoutes))[0].children)
 }
 
-/**
- * 处理路由格式及添加捕获所有路由或 404 Not found 路由
- * @description 替换 dynamicRoutes（/@/router/route）第一个顶级 children 的路由
- * @returns 返回替换后的路由数组
- */
-export function setFilterRouteEnd() {
-  const filterRouteEnd: any = formatTwoStageRoutes(formatFlatteningRoutes(dynamicRoutes))
-  // notFoundAndNoPower 防止 404、401 不在 layout 布局中，不设置的话，404、401 界面将全屏显示
-  // 关联问题 No match found for location with path 'xxx'
-  filterRouteEnd[0].children = [...filterRouteEnd[0].children, ...notFoundAndNoPower]
-  return filterRouteEnd
-}
+// /**
+//  * 处理路由格式及添加捕获所有路由或 404 Not found 路由
+//  * @description 替换 dynamicRoutes（/@/router/route）第一个顶级 children 的路由
+//  * @returns 返回替换后的路由数组
+//  */
+// export function setFilterRouteEnd() {
+//   // const filterRouteEnd: any = formatTwoStageRoutes(formatFlatteningRoutes(dynamicRoutes))
+//   // notFoundAndNoPower 防止 404、401 不在 layout 布局中，不设置的话，404、401 界面将全屏显示
+//   // 关联问题 No match found for location with path 'xxx'
+//   filterRouteEnd[0].children = [...filterRouteEnd[0].children, ...notFoundAndNoPower]
+//   return filterRouteEnd
+// }
 
-/**
- * 添加动态路由
- * @method router.addRoute
- * @description 此处循环为 dynamicRoutes（/@/router/route）第一个顶级 children 的路由一维数组，非多级嵌套
- * @link 参考：https://next.router.vuejs.org/zh/api/#addroute
- */
-export async function setAddRoute() {
-  await setFilterRouteEnd().forEach((route: RouteRecordRaw) => {
-    router.addRoute(route)
-  })
-}
+// /**
+//  * 添加动态路由
+//  * @method router.addRoute
+//  * @description 此处循环为 dynamicRoutes（/@/router/route）第一个顶级 children 的路由一维数组，非多级嵌套
+//  * @link 参考：https://next.router.vuejs.org/zh/api/#addroute
+//  */
+// export async function setAddRoute() {
+//   await setFilterRouteEnd().forEach((route: RouteRecordRaw) => {
+//     useRouter().addRoute(route)
+//   })
+// }
 
 /**
  * 请求后端路由菜单接口
@@ -119,7 +109,7 @@ export async function getBackEndControlRoutes() {
   const res = await new AuthApi().getUserMenus().catch(() => { })
   if (res?.success && (res?.data?.length as number) > 0) {
     const menus = [] as any
-    res.data?.forEach((menu) => {
+    res.data?.forEach((menu: any) => {
       menus.push({
         id: menu.id,
         parentId: menu.parentId,

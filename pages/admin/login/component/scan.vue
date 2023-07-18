@@ -18,7 +18,7 @@ const qrcodeRef = ref<HTMLElement | null>(null)
 // 初始化生成二维码
 const initQrcode = () => {
   nextTick(() => {
-    ;(<HTMLElement>qrcodeRef.value).innerHTML = ''
+    ; (<HTMLElement>qrcodeRef.value).innerHTML = ''
     new QRCode(qrcodeRef.value, {
       text: `https://qm.qq.com/cgi-bin/qm/qr?k=iNzyqsBsyQKuIxGEznL3PYwLzWOcqmJE&jump_from=webapi`,
       width: 260,

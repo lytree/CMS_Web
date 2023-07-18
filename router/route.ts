@@ -1211,7 +1211,7 @@ export const notFoundAndNoPower = [
   {
     path: '/:path(.*)*',
     name: 'notFound',
-    component: () => import('@/views/error/404.vue'),
+    component: () => import('@/pages/error/404.vue'),
     meta: {
       title: 'message.staticRoutes.notFound',
       isHide: true,
@@ -1238,7 +1238,7 @@ export const staticRoutes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('/@/views/admin/login/index.vue'),
+    component: () => import('@/pages/admin/login/index.vue'),
     meta: {
       title: '登录',
     },
@@ -1250,7 +1250,7 @@ export const staticRoutes: Array<RouteRecordRaw> = [
   {
     path: '/example/visualizingDemo1',
     name: 'example/visualizingDemo1',
-    component: () => import('/@/views/example/visualizing/demo1.vue'),
+    component: () => import('@/pages/example/visualizing/demo1.vue'),
     meta: {
       title: 'message.router.visualizingLinkDemo1',
     },
@@ -1258,7 +1258,7 @@ export const staticRoutes: Array<RouteRecordRaw> = [
   {
     path: '/example/visualizingDemo2',
     name: 'example/visualizingDemo2',
-    component: () => import('/@/views/example/visualizing/demo2.vue'),
+    component: () => import('@/pages/example/visualizing/demo2.vue'),
     meta: {
       title: 'message.router.visualizingLinkDemo2',
     },

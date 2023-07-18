@@ -1,34 +1,25 @@
 <template>
   <div>
     <el-form ref="formRef" :model="state.ruleForm" size="large" class="login-content-form">
-      <el-form-item
-        class="login-animation1"
-        prop="mobile"
-        :rules="[
-          { required: true, message: '请输入手机号', trigger: ['blur', 'change'] },
-          { validator: testMobile, trigger: ['blur', 'change'] },
-        ]"
-      >
-        <el-input
-          ref="phoneRef"
-          text
-          :placeholder="$t('message.mobile.placeholder1')"
-          maxlength="11"
-          v-model="state.ruleForm.mobile"
-          clearable
-          autocomplete="off"
-          @keyup.enter="onSignIn"
-        >
+      <el-form-item class="login-animation1" prop="mobile" :rules="[
+        { required: true, message: '请输入手机号', trigger: ['blur', 'change'] },
+        { validator: testMobile, trigger: ['blur', 'change'] },
+      ]">
+        <el-input ref="phoneRef" text :placeholder="$t('message.mobile.placeholder1')" maxlength="11"
+          v-model="state.ruleForm.mobile" clearable autocomplete="off" @keyup.enter="onSignIn">
           <template #prefix>
             <el-icon class="el-input__icon"><ele-Iphone /></el-icon>
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item class="login-animation2" prop="code" :rules="[{ required: true, message: '请输入短信验证码', trigger: ['blur', 'change'] }]">
-        <MyInputCode v-model="state.ruleForm.code" @keyup.enter="onSignIn" :mobile="state.ruleForm.mobile" :validate="validate" @send="onSend" />
+      <el-form-item class="login-animation2" prop="code"
+        :rules="[{ required: true, message: '请输入短信验证码', trigger: ['blur', 'change'] }]">
+        <MyInputCode v-model="state.ruleForm.code" @keyup.enter="onSignIn" :mobile="state.ruleForm.mobile"
+          :validate="validate" @send="onSend" />
       </el-form-item>
       <el-form-item class="login-animation3">
-        <el-button round type="primary" v-waves class="login-content-submit" @click="onSignIn" :loading="state.loading.signIn">
+        <el-button round type="primary" v-waves class="login-content-submit" @click="onSignIn"
+          :loading="state.loading.signIn">
           <span>{{ $t('message.mobile.btnText') }}</span>
         </el-button>
       </el-form-item>
@@ -148,6 +139,7 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
 .login-content-form {
   margin-top: 20px;
 }
+
 .login-content-form .login-animation1 {
   opacity: 0;
   animation-name: error-num;
@@ -155,6 +147,7 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
   animation-fill-mode: forwards;
   animation-delay: calc(1/10)s;
 }
+
 .login-content-form .login-animation2 {
   opacity: 0;
   animation-name: error-num;
@@ -162,6 +155,7 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
   animation-fill-mode: forwards;
   animation-delay: calc(2/10)s;
 }
+
 .login-content-form .login-animation3 {
   opacity: 0;
   animation-name: error-num;
@@ -169,6 +163,7 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
   animation-fill-mode: forwards;
   animation-delay: calc(3/10)s;
 }
+
 .login-content-form .login-animation4 {
   opacity: 0;
   animation-name: error-num;
@@ -176,16 +171,19 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
   animation-fill-mode: forwards;
   animation-delay: calc(4/10)s;
 }
+
 .login-content-form .login-content-code {
   width: 100%;
   padding: 0;
 }
+
 .login-content-form .login-content-submit {
   width: 100%;
   letter-spacing: 2px;
   font-weight: 300;
   margin-top: 15px;
 }
+
 .login-content-form .login-msg {
   color: var(--el-text-color-placeholder);
 }

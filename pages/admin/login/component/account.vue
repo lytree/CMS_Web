@@ -1,37 +1,27 @@
 <template>
   <div>
     <el-form ref="formRef" :model="state.ruleForm" size="large" class="login-content-form">
-      <el-form-item class="login-animation1" prop="userName" :rules="[{ required: true, message: '请输入用户名', trigger: ['blur', 'change'] }]">
-        <el-input
-          text
-          :placeholder="$t('message.account.accountPlaceholder1')"
-          v-model="state.ruleForm.userName"
-          clearable
-          autocomplete="off"
-          @keyup.enter="onSignIn"
-        >
+      <el-form-item class="login-animation1" prop="userName"
+        :rules="[{ required: true, message: '请输入用户名', trigger: ['blur', 'change'] }]">
+        <el-input text :placeholder="$t('message.account.accountPlaceholder1')" v-model="state.ruleForm.userName"
+          clearable autocomplete="off" @keyup.enter="onSignIn">
           <template #prefix>
             <el-icon class="el-input__icon"><ele-User /></el-icon>
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item class="login-animation2" prop="password" :rules="[{ required: true, message: '请输入密码', trigger: ['blur', 'change'] }]">
-        <el-input
-          :type="state.isShowPassword ? 'text' : 'password'"
-          :placeholder="$t('message.account.accountPlaceholder2')"
-          v-model="state.ruleForm.password"
-          autocomplete="off"
-          @keyup.enter="onSignIn"
-        >
+      <el-form-item class="login-animation2" prop="password"
+        :rules="[{ required: true, message: '请输入密码', trigger: ['blur', 'change'] }]">
+        <el-input :type="state.isShowPassword ? 'text' : 'password'"
+          :placeholder="$t('message.account.accountPlaceholder2')" v-model="state.ruleForm.password" autocomplete="off"
+          @keyup.enter="onSignIn">
           <template #prefix>
             <el-icon class="el-input__icon"><ele-Unlock /></el-icon>
           </template>
           <template #suffix>
-            <i
-              class="iconfont el-input__icon login-content-password"
+            <i class="iconfont el-input__icon login-content-password"
               :class="state.isShowPassword ? 'icon-yincangmima' : 'icon-xianshimima'"
-              @click="state.isShowPassword = !state.isShowPassword"
-            >
+              @click="state.isShowPassword = !state.isShowPassword">
             </i>
           </template>
         </el-input>
@@ -57,15 +47,8 @@
       </el-col>
     </el-form-item> -->
       <el-form-item class="login-animation4">
-        <el-button
-          type="primary"
-          class="login-content-submit"
-          round
-          v-waves
-          @click="onSignIn"
-          :disabled="state.disabled.signIn"
-          :loading="state.loading.signIn"
-        >
+        <el-button type="primary" class="login-content-submit" round v-waves @click="onSignIn"
+          :disabled="state.disabled.signIn" :loading="state.loading.signIn">
           <span>{{ $t('message.account.accountBtnText') }}</span>
         </el-button>
       </el-form-item>
@@ -81,14 +64,14 @@ import { ElMessage } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 // import Cookies from 'js-cookie'
 // import { storeToRefs } from 'pinia'
-// import { useThemeConfig } from '/@/stores/themeConfig'
-// import { initFrontEndControlRoutes } from '/@/router/frontEnd'
+// import { useThemeConfig } from '@/stores/themeConfig'
+// import { initFrontEndControlRoutes } from '@/router/frontEnd'
 import { initBackEndControlRoutes } from '@/router/backEnd'
 import { Session } from '@/utils/storage'
 import { formatAxis } from '@/utils/formatTime'
 import { NextLoading } from '@/utils/loading'
 import { AuthApi } from '@/api/admin/Auth'
-import { AuthLoginInput } from '@/server/api/admin/data-contracts'
+import { AuthLoginInput } from '@/api/admin/data-contracts'
 import { useUserInfo } from '@/stores/userInfo'
 
 const MyCaptchaDialog = defineAsyncComponent(() => import('@/components/my-captcha/dialog.vue'))
@@ -161,7 +144,7 @@ const onSignIn = async () => {
     state.disabled.signIn = true
     const res = await new AuthApi()
       .isCaptcha()
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => {
         state.disabled.signIn = false
       })

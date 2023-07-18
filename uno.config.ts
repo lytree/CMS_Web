@@ -10,7 +10,11 @@ import {
 } from 'unocss'
 
 export default defineConfig({
-  exclude: ['node_modules', 'dist', '.git', '.husky', '.vscode', 'public', 'build', 'mock', './stats.html'],
+  content: {
+    pipeline: {
+      exclude: ['node_modules', 'dist', '.git', '.husky', '.vscode', 'public', 'build', 'mock', './stats.html'],
+    },
+  },
   shortcuts: {
     'wh-full': 'w-full h-full',
     'flex-center': 'flex justify-center items-center',
