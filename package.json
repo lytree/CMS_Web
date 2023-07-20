@@ -30,7 +30,7 @@
         "@vueuse/nuxt": "^10.2.1",
         "consola": "^3.2.3",
         "eslint": "^8.45.0",
-        "nuxt": "^3.6.3",
+        "nuxt": "^3.6.5",
         "screenfull": "^6.0.2",
         "swagger-typescript-api": "^13.0.0",
         "typescript": "^5.1.6",
