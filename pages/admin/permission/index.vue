@@ -1,8 +1,8 @@
 <script lang="ts" setup name="admin/permission">
 import { defineAsyncComponent, getCurrentInstance, onBeforeMount, onMounted, reactive, ref } from 'vue'
 import { cloneDeep } from 'lodash-es'
-import type { PermissionListOutput } from '@/api/admin/data-contracts'
-import { PermissionApi } from '@/api/admin/Permission'
+import type { PermissionListOutput } from '@/server/api/admin/data-contracts'
+import { PermissionApi } from '@/server/api/admin/Permission'
 import { filterTree, listToTree, treeToList } from '@/utils/tree'
 import eventBus from '@/utils/mitt'
 import { auth } from '@/utils/authFunction'

@@ -2,9 +2,9 @@
 import type { PropType } from 'vue'
 import { getCurrentInstance, reactive, ref, toRefs } from 'vue'
 import { cloneDeep, replace, trimStart } from 'lodash-es'
-import type { ApiListOutput, PermissionListOutput, PermissionUpdateDotInput } from '@/api/admin/data-contracts'
-import { PermissionApi } from '@/api/admin/Permission'
-import { ApiApi } from '@/api/admin/Api'
+import type { ApiListOutput, PermissionListOutput, PermissionUpdateDotInput } from '@/server/api/admin/data-contracts'
+import { PermissionApi } from '@/server/api/admin/Permission'
+import { ApiApi } from '@/server/api/admin/Api'
 import { listToTree, treeToList } from '@/utils/tree'
 import eventBus from '@/utils/mitt'
 

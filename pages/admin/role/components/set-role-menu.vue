@@ -2,8 +2,8 @@
 import { computed, getCurrentInstance, reactive, ref } from 'vue'
 import { ElTree } from 'element-plus'
 import { cloneDeep } from 'lodash-es'
-import type { PermissionAssignInput, RoleGetListOutput } from '@/api/admin/data-contracts'
-import { PermissionApi } from '@/api/admin/Permission'
+import type { PermissionAssignInput, RoleGetListOutput } from '@/server/api/admin/data-contracts'
+import { PermissionApi } from '@/server/api/admin/Permission'
 import { listToTree } from '@/utils/tree'
 
 const props = defineProps({

@@ -1,12 +1,12 @@
-<script lang="ts" setup name="admin/dict">
+<script lang="ts" setup>
 import { defineAsyncComponent, ref } from 'vue'
 import { Pane } from 'splitpanes'
-import type { DictTypeGetPageOutput } from '@/api/admin/data-contracts'
+import type { DictTypeGetPageOutput } from '@/server/api/admin/data-contracts'
 
 // 引入组件
 const DictType = defineAsyncComponent(() => import('./dict-type.vue'))
 const Dict = defineAsyncComponent(() => import('./dict.vue'))
-const MyLayout = defineAsyncComponent(() => import('//components/my-layout/index.vue'))
+const MyLayout = defineAsyncComponent(() => import('@/components/l-layout/index.vue'))
 
 const dictRef = ref()
 

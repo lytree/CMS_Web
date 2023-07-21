@@ -1,8 +1,8 @@
 <script lang="ts" setup name="admin/loginLog">
 import { onMounted, reactive } from 'vue'
 import dayjs from 'dayjs'
-import type { LoginLogListOutput, PageInputLogGetPageDto } from '@/api/admin/data-contracts'
-import { LoginLogApi } from '@/api/admin/LoginLog'
+import type { LoginLogListOutput, PageInputLogGetPageDto } from '@/server/api/admin/data-contracts'
+import { LoginLogApi } from '@/server/api/admin/LoginLog'
 
 const state = reactive({
   loading: false,

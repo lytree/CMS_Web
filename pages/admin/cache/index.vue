@@ -1,6 +1,6 @@
 <script lang="ts" setup name="admin/cache">
 import { getCurrentInstance, onMounted, reactive } from 'vue'
-import { CacheApi } from '@/api/admin/Cache'
+import { CacheApi } from '@/server/api/admin/Cache'
 
 defineProps({
   title: {

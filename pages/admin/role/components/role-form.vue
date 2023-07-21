@@ -2,8 +2,8 @@
 import type { PropType } from 'vue'
 import { reactive, ref, toRefs } from 'vue'
 import { cloneDeep } from 'lodash-es'
-import type { RoleGetListOutput, RoleUpdateInput } from '@/api/admin/data-contracts'
-import { RoleApi } from '@/api/admin/Role'
+import type { RoleGetListOutput, RoleUpdateInput } from '@/server/api/admin/data-contracts'
+import { RoleApi } from '@/server/api/admin/Role'
 import eventBus from '@/utils/mitt'
 
 defineProps({

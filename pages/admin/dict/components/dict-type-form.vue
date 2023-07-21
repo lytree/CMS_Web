@@ -1,7 +1,8 @@
 <script lang="ts" setup name="admin/dictType/form">
 import { getCurrentInstance, reactive, ref, toRefs } from 'vue'
-import type { DictTypeAddInput, DictTypeUpdateInput } from '@/api/admin/data-contracts'
-import { DictTypeApi } from '@/api/admin/DictType'
+import type { DictTypeAddInput, DictTypeUpdateInput } from '@/server/api/admin/data-contracts'
+
+// import { DictTypeApi } from '@/server/api/admin/DictType'
 import eventBus from '@/utils/mitt'
 
 defineProps({
@@ -24,10 +25,10 @@ const { form } = toRefs(state)
 // 打开对话框
 async function open(row: any = {}) {
   if (row.id > 0) {
-    const res = await new DictTypeApi().get({ id: row.id }, { loading: true }).catch(() => {
-      proxy.$modal.closeLoading()
-    })
-
+    // const res = await new DictTypeApi().get({ id: row.id }, { loading: true }).catch(() => {
+    //   proxy.$modal.closeLoading()
+    // })
+    const res: any = {}
     if (res?.success)
       state.form = res.data as DictTypeAddInput & DictTypeUpdateInput
   }
@@ -49,16 +50,16 @@ function onSure() {
       return
 
     state.sureLoading = true
-    let res = {} as any
-    if (state.form.id != undefined && state.form.id > 0) {
-      res = await new DictTypeApi().update(state.form, { showSuccessMessage: true }).catch(() => {
-        state.sureLoading = false
-      })
+    const res = {} as any
+    if (state.form.id !== undefined && state.form.id > 0) {
+      // res = await new DictTypeApi().update(state.form, { showSuccessMessage: true }).catch(() => {
+      //   state.sureLoading = false
+      // })
     }
     else {
-      res = await new DictTypeApi().add(state.form, { showSuccessMessage: true }).catch(() => {
-        state.sureLoading = false
-      })
+      // res = await new DictTypeApi().add(state.form, { showSuccessMessage: true }).catch(() => {
+      //   state.sureLoading = false
+      // })
     }
     state.sureLoading = false
 
@@ -77,23 +78,24 @@ defineExpose({
 <template>
   <div>
     <el-dialog
-      v-model="state.showDialog"
-      destroy-on-close
-      :title="title"
-      draggable
-      :close-on-click-modal="false"
-      :close-on-press-escape="false"
-      width="769px"
+      v-model="state.showDialog" destroy-on-close :title="title" draggable :close-on-click-modal="false"
+      :close-on-press-escape="false" width="769px"
     >
       <el-form ref="formRef" :model="form" size="default" label-width="80px">
         <el-row :gutter="35">
           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-            <el-form-item label="名称" prop="name" :rules="[{ required: true, message: '请输入名称', trigger: ['blur', 'change'] }]">
+            <el-form-item
+              label="名称" prop="name"
+              :rules="[{ required: true, message: '请输入名称', trigger: ['blur', 'change'] }]"
+            >
               <el-input v-model="form.name" autocomplete="off" />
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-            <el-form-item label="编码" prop="code" :rules="[{ required: true, message: '请输入编码', trigger: ['blur', 'change'] }]">
+            <el-form-item
+              label="编码" prop="code"
+              :rules="[{ required: true, message: '请输入编码', trigger: ['blur', 'change'] }]"
+            >
               <el-input v-model="form.code" autocomplete="off" />
             </el-form-item>
           </el-col>

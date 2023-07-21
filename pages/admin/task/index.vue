@@ -1,8 +1,8 @@
 <script lang="ts" setup name="admin/task">
 import { defineAsyncComponent, getCurrentInstance, onMounted, reactive, ref } from 'vue'
 import dayjs from 'dayjs'
-import type { PageInputTaskGetPageDto, TaskListOutput } from '@/api/admin/data-contracts'
-import { TaskApi } from '@/api/admin/Task'
+import type { PageInputTaskGetPageDto, TaskListOutput } from '@/server/api/admin/data-contracts'
+import { TaskApi } from '@/server/api/admin/Task'
 
 // 引入组件
 const TaskLogs = defineAsyncComponent(() => import('./components/task-logs.vue'))

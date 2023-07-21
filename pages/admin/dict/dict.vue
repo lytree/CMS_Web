@@ -1,7 +1,8 @@
 <script lang="ts" setup name="admin/dictData">
 import { defineAsyncComponent, getCurrentInstance, onBeforeMount, onMounted, reactive, ref } from 'vue'
-import type { DictGetPageOutput, DictTypeGetPageOutput, PageInputDictGetPageDto } from '@/api/admin/data-contracts'
-import { DictApi } from '@/api/admin/Dict'
+import type { DictGetPageOutput, DictTypeGetPageOutput, PageInputDictGetPageDto } from '@/server/api/admin/data-contracts'
+
+// import { DictApi } from '@/server/api/admin/Dict'
 import eventBus from '@/utils/mitt'
 
 // 引入组件
@@ -41,9 +42,10 @@ onBeforeMount(() => {
 async function onQuery() {
   state.loading = true
   state.pageInput.filter = state.filterModel
-  const res = await new DictApi().getPage(state.pageInput).catch(() => {
-    state.loading = false
-  })
+  // const res = await new DictApi().getPage(state.pageInput).catch(() => {
+  //   state.loading = false
+  // })
+  const res: any = {}
   state.dictListData = res?.data?.list ?? []
   state.total = res?.data?.total ?? 0
   state.loading = false
@@ -64,13 +66,13 @@ function onEdit(row: DictGetPageOutput) {
 }
 
 function onDelete(row: DictGetPageOutput) {
-  proxy.$modal
-    .confirmDelete(`确定要删除【${row.name}】?`)
-    .then(async () => {
-      await new DictApi().delete({ id: row.id }, { loading: true, showSuccessMessage: true })
-      onQuery()
-    })
-    .catch(() => {})
+  // proxy.$modal
+  //   .confirmDelete(`确定要删除【${row.name}】?`)
+  //   .then(async () => {
+  //     await new DictApi().delete({ id: row.id }, { loading: true, showSuccessMessage: true })
+  //     onQuery()
+  //   })
+  //   .catch(() => { })
 }
 
 function onSizeChange(val: number) {
@@ -107,9 +109,9 @@ defineExpose({
           <el-button type="primary" icon="ele-Search" @click="onQuery">
             查询
           </el-button>
-          <el-button v-auth="'api:admin:dict:add'" type="primary" icon="ele-Plus" @click="onAdd">
+          <!-- <el-button v-auth="'api:admin:dict:add'" type="primary" icon="ele-Plus" @click="onAdd">
             新增
-          </el-button>
+          </el-button> -->
         </el-form-item>
       </el-form>
     </el-card>
@@ -132,25 +134,26 @@ defineExpose({
         </el-table-column>
         <el-table-column label="操作" width="140" fixed="right" header-align="center" align="center">
           <template #default="{ row }">
-            <el-button v-auth="'api:admin:dict:update'" icon="ele-EditPen" size="small" text type="primary" @click="onEdit(row)">
+            <!-- <el-button
+              v-auth="'api:admin:dict:update'" icon="ele-EditPen" size="small" text type="primary"
+              @click="onEdit(row)"
+            >
               编辑
             </el-button>
-            <el-button v-auth="'api:admin:dict:delete'" icon="ele-Delete" size="small" text type="danger" @click="onDelete(row)">
+            <el-button
+              v-auth="'api:admin:dict:delete'" icon="ele-Delete" size="small" text type="danger"
+              @click="onDelete(row)"
+            >
               删除
-            </el-button>
+            </el-button> -->
           </template>
         </el-table-column>
       </el-table>
       <div class="my-flex my-flex-end" style="margin-top: 20px">
         <el-pagination
-          v-model:currentPage="state.pageInput.currentPage"
-          v-model:page-size="state.pageInput.pageSize"
-          :total="state.total"
-          :page-sizes="[10, 20, 50, 100]"
-          small
-          background
-          layout="total, sizes, prev, pager, next, jumper"
-          @size-change="onSizeChange"
+          v-model:currentPage="state.pageInput.currentPage" v-model:page-size="state.pageInput.pageSize"
+          :total="state.total" :page-sizes="[10, 20, 50, 100]" small background
+          layout="total, sizes, prev, pager, next, jumper" @size-change="onSizeChange"
           @current-change="onCurrentChange"
         />
       </div>

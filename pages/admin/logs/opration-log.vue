@@ -2,8 +2,8 @@
 import { onMounted, reactive, ref } from 'vue'
 import dayjs from 'dayjs'
 import type { TableInstance } from 'element-plus'
-import type { OprationLogListOutput, PageInputLogGetPageDto } from '@/api/admin/data-contracts'
-import { OprationLogApi } from '@/api/admin/OprationLog'
+import type { OprationLogListOutput, PageInputLogGetPageDto } from '@/server/api/admin/data-contracts'
+import { OprationLogApi } from '@/server/api/admin/OprationLog'
 
 const tableRef = ref<TableInstance>()
 

@@ -1,7 +1,8 @@
-<script lang="ts" setup name="'admin/dictType'">
+<script lang="ts" setup>
 import { defineAsyncComponent, getCurrentInstance, nextTick, onBeforeMount, onMounted, reactive, ref } from 'vue'
-import type { DictTypeGetPageOutput, PageInputDictTypeGetPageDto } from '@/api/admin/data-contracts'
-import { DictTypeApi } from '@/api/admin/DictType'
+import type { DictTypeGetPageOutput, PageInputDictTypeGetPageDto } from '@/server/api/admin/data-contracts'
+
+// import { DictTypeApi } from '@/server/api/admin/DictType'
 import eventBus from '@/utils/mitt'
 
 const emits = defineEmits(['change'])
@@ -44,9 +45,10 @@ onBeforeMount(() => {
 async function onQuery() {
   state.loading = true
   state.pageInput.filter = state.filterModel
-  const res = await new DictTypeApi().getPage(state.pageInput).catch(() => {
-    state.loading = false
-  })
+  // const res = await new DictTypeApi().getPage(state.pageInput).catch(() => {
+  //   state.loading = false
+  // })
+  const res: any = {}
   state.dictTypeListData = res?.data?.list ?? []
   state.total = res?.data?.total ?? 0
   if (state.dictTypeListData.length > 0) {
@@ -68,13 +70,13 @@ function onEdit(row: DictTypeGetPageOutput) {
 }
 
 function onDelete(row: DictTypeGetPageOutput) {
-  proxy.$modal
-    .confirmDelete(`确定要删除【${row.name}】?`)
-    .then(async () => {
-      await new DictTypeApi().delete({ id: row.id }, { loading: true, showSuccessMessage: true })
-      onQuery()
-    })
-    .catch(() => {})
+  // proxy.$modal
+  //   .confirmDelete(`确定要删除【${row.name}】?`)
+  //   .then(async () => {
+  //     await new DictTypeApi().delete({ id: row.id }, { loading: true, showSuccessMessage: true })
+  //     onQuery()
+  //   })
+  //   .catch(() => {})
 }
 
 function onSizeChange(val: number) {
@@ -88,7 +90,7 @@ function onCurrentChange(val: number) {
 }
 
 function onTableCurrentChange(currentRow: DictTypeGetPageOutput) {
-  if (state.lastCurrentRow?.id != currentRow?.id) {
+  if (state.lastCurrentRow?.id !== currentRow?.id) {
     state.lastCurrentRow = currentRow
     emits('change', currentRow)
   }
@@ -106,9 +108,9 @@ function onTableCurrentChange(currentRow: DictTypeGetPageOutput) {
           <el-button type="primary" icon="ele-Search" @click="onQuery">
             查询
           </el-button>
-          <el-button v-auth="'api:admin:dict:add'" type="primary" icon="ele-Plus" @click="onAdd">
+          <!-- <el-button v-auth="'api:admin:dict:add'" type="primary" icon="ele-Plus" @click="onAdd">
             新增
-          </el-button>
+          </el-button> -->
         </el-form-item>
       </el-form>
     </el-card>
@@ -138,12 +140,12 @@ function onTableCurrentChange(currentRow: DictTypeGetPageOutput) {
         </el-table-column>
         <el-table-column label="操作" width="140" fixed="right" header-align="center" align="center">
           <template #default="{ row }">
-            <el-button v-auth="'api:admin:dict:update'" icon="ele-EditPen" size="small" text type="primary" @click="onEdit(row)">
+            <!-- <el-button v-auth="'api:admin:dict:update'" icon="ele-EditPen" size="small" text type="primary" @click="onEdit(row)">
               编辑
             </el-button>
             <el-button v-auth="'api:admin:dict:delete'" icon="ele-Delete" size="small" text type="danger" @click="onDelete(row)">
               删除
-            </el-button>
+            </el-button> -->
           </template>
         </el-table-column>
       </el-table>

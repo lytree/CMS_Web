@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, defineAsyncComponent, reactive, ref, toRefs } from 'vue'
-import type { RoleGetListOutput, RoleSetDataScopeInput } from '@/api/admin/data-contracts'
-import { RoleApi } from '@/api/admin/Role'
+import type { RoleGetListOutput, RoleSetDataScopeInput } from '@/server/api/admin/data-contracts'
+import { RoleApi } from '@/server/api/admin/Role'
 
 const props = defineProps({
   title: {

@@ -1,8 +1,8 @@
 <script lang="ts" setup name="admin/view/form">
 import type { PropType } from 'vue'
 import { reactive, ref, toRefs } from 'vue'
-import type { ViewListOutput, ViewUpdateInput } from '@/api/admin/data-contracts'
-import { ViewApi } from '@/api/admin/View'
+import type { ViewListOutput, ViewUpdateInput } from '@/server/api/admin/data-contracts'
+import { ViewApi } from '@/server/api/admin/View'
 import eventBus from '@/utils/mitt'
 
 defineProps({

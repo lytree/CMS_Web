@@ -1,9 +1,9 @@
 <script lang="ts" setup name="admin/api">
 import { defineAsyncComponent, getCurrentInstance, onBeforeMount, onMounted, reactive, ref } from 'vue'
 import { cloneDeep, isArray } from 'lodash-es'
-import type { ApiListOutput } from '@/api/admin/data-contracts'
-import { ApiApi } from '@/api/admin/Api'
-import { ApiApi as ApiExtApi } from '@/api/admin.extend/Api'
+import type { ApiListOutput } from '@/server/api/admin/data-contracts'
+import { ApiApi } from '@/server/api/admin/Api'
+import { ApiApi as ApiExtApi } from '@/server/api/admin.extend/Api'
 import { filterTree, listToTree, treeToList } from '@/utils/tree'
 import eventBus from '@/utils/mitt'
 

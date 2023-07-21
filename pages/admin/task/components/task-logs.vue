@@ -1,8 +1,8 @@
 <script lang="ts" setup name="admin/taskLog">
 import { reactive } from 'vue'
 import dayjs from 'dayjs'
-import type { PageInputTaskLogGetPageDto, ResultOutputPageOutputTaskLog, TaskListOutput } from '@/api/admin/data-contracts'
-import { TaskLogApi } from '@/api/admin/TaskLog'
+import type { PageInputTaskLogGetPageDto, ResultOutputPageOutputTaskLog, TaskListOutput } from '@/server/api/admin/data-contracts'
+import { TaskLogApi } from '@/server/api/admin/TaskLog'
 
 defineProps({
   title: {

@@ -1,8 +1,9 @@
 <script lang="ts" setup name="admin/dict/form">
 import { getCurrentInstance, reactive, ref, toRefs } from 'vue'
 import type { FormInstance } from 'element-plus'
-import type { DictAddInput, DictUpdateInput } from '@/api/admin/data-contracts'
-import { DictApi } from '@/api/admin/Dict'
+import type { DictAddInput, DictUpdateInput } from '@/server/api/admin/data-contracts'
+
+// import { DictApi } from '@/server/api/admin/Dict'
 import eventBus from '@/utils/mitt'
 
 defineProps({
@@ -27,10 +28,10 @@ const { form } = toRefs(state)
 async function open(row: any = {}) {
   if (row.id > 0) {
     state.contiAdd = false
-    const res = await new DictApi().get({ id: row.id }, { loading: true }).catch(() => {
-      proxy.$modal.closeLoading()
-    })
-
+    // const res = await new DictApi().get({ id: row.id }, { loading: true }).catch(() => {
+    //   proxy.$modal.closeLoading()
+    // })
+    const res: any = {}
     if (res?.success)
       state.form = res.data as DictAddInput & DictUpdateInput
   }
@@ -53,16 +54,16 @@ function onSure() {
 
     state.sureLoading = true
     let res = {} as any
-    if (state.form.id != undefined && state.form.id > 0) {
-      res = await new DictApi().update(state.form, { showSuccessMessage: true }).catch(() => {
-        state.sureLoading = false
-      })
-    }
-    else {
-      res = await new DictApi().add(state.form, { showSuccessMessage: true }).catch(() => {
-        state.sureLoading = false
-      })
-    }
+    // if (state.form.id !== undefined && state.form.id > 0) {
+    //   res = await new DictApi().update(state.form, { showSuccessMessage: true }).catch(() => {
+    //     state.sureLoading = false
+    //   })
+    // }
+    // else {
+    //   res = await new DictApi().add(state.form, { showSuccessMessage: true }).catch(() => {
+    //     state.sureLoading = false
+    //   })
+    // }
     state.sureLoading = false
 
     if (res?.success) {

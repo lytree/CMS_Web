@@ -1,8 +1,8 @@
 <script lang="ts" setup name="admin/file">
 import { computed, defineAsyncComponent, getCurrentInstance, onBeforeMount, onMounted, reactive, ref } from 'vue'
 import dayjs from 'dayjs'
-import type { FileGetPageOutput, PageInputFileGetPageDto } from '@/api/admin/data-contracts'
-import { FileApi } from '@/api/admin/File'
+import type { FileGetPageOutput, PageInputFileGetPageDto } from '@/server/api/admin/data-contracts'
+import { FileApi } from '@/server/api/admin/File'
 import eventBus from '@/utils/mitt'
 import { isImage } from '@/utils/test'
 import commonFunction from '@/utils/commonFunction'

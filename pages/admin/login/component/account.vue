@@ -70,8 +70,8 @@ import { initBackEndControlRoutes } from '@/router/backEnd'
 import { Session } from '@/utils/storage'
 import { formatAxis } from '@/utils/formatTime'
 import { NextLoading } from '@/utils/loading'
-import { AuthApi } from '@/api/admin/Auth'
-import { AuthLoginInput } from '@/api/admin/data-contracts'
+import { AuthApi } from '@/server/api/admin/Auth'
+import { AuthLoginInput } from '@/server/api/admin/data-contracts'
 import { useUserInfo } from '@/stores/userInfo'
 
 const MyCaptchaDialog = defineAsyncComponent(() => import('@/components/my-captcha/dialog.vue'))

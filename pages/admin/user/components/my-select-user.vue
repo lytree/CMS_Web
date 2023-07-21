@@ -1,7 +1,7 @@
 <script lang="ts" setup name="admin/user/components/my-select-user">
 import type { PropType } from 'vue'
 import { defineAsyncComponent, reactive, ref } from 'vue'
-import type { UserGetPageOutput } from '@/api/admin/data-contracts'
+import type { UserGetPageOutput } from '@/server/api/admin/data-contracts'
 
 const props = defineProps({
   name: String as PropType<string | undefined | null>,

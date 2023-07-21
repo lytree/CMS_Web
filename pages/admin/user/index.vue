@@ -1,8 +1,8 @@
 <script lang="ts" setup name="admin/user">
 import { defineAsyncComponent, getCurrentInstance, onBeforeMount, onMounted, reactive, ref } from 'vue'
 import { Pane } from 'splitpanes'
-import type { OrgListOutput, PageInputUserGetPageDto, UserGetPageOutput, UserResetPasswordInput, UserSetManagerInput } from '@/api/admin/data-contracts'
-import { UserApi } from '@/api/admin/User'
+import type { OrgListOutput, PageInputUserGetPageDto, UserGetPageOutput, UserResetPasswordInput, UserSetManagerInput } from '@/server/api/admin/data-contracts'
+import { UserApi } from '@/server/api/admin/User'
 import eventBus from '@/utils/mitt'
 import { auth } from '@/utils/authFunction'
 import { useUserInfo } from '@/stores/userInfo'

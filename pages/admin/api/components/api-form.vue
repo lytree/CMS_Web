@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue'
 import { defineComponent, reactive, ref, toRefs } from 'vue'
-import type { ApiListOutput, ApiUpdateInput } from '@/api/admin/data-contracts'
-import { ApiApi } from '@/api/admin/Api'
+import type { ApiListOutput, ApiUpdateInput } from '@/server/api/admin/data-contracts'
+import { ApiApi } from '@/server/api/admin/Api'
 import eventBus from '@/utils/mitt'
 </script>
 

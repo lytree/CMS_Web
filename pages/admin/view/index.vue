@@ -1,8 +1,8 @@
 <script lang="ts" setup name="admin/view">
 import { defineAsyncComponent, getCurrentInstance, onBeforeMount, onMounted, reactive, ref } from 'vue'
 import { cloneDeep } from 'lodash-es'
-import type { ViewListOutput } from '@/api/admin/data-contracts'
-import { ViewApi } from '@/api/admin/View'
+import type { ViewListOutput } from '@/server/api/admin/data-contracts'
+import { ViewApi } from '@/server/api/admin/View'
 import { filterTree, listToTree } from '@/utils/tree'
 import eventBus from '@/utils/mitt'
 

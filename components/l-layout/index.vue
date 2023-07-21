@@ -26,7 +26,7 @@ onBeforeMount(() => {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 :deep(.splitpanes.default-theme .splitpanes__splitter) {
   background-color: transparent;
   border-left-color: transparent;

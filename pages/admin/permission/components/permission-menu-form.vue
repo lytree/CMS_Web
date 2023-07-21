@@ -1,9 +1,9 @@
 <script lang="ts" setup name="admin/permission/permission-menu-form">
 import type { PropType } from 'vue'
 import { defineAsyncComponent, getCurrentInstance, reactive, ref, toRefs } from 'vue'
-import type { PermissionListOutput, PermissionUpdateMenuInput, ViewListOutput } from '@/api/admin/data-contracts'
-import { PermissionApi } from '@/api/admin/Permission'
-import { ViewApi } from '@/api/admin/View'
+import type { PermissionListOutput, PermissionUpdateMenuInput, ViewListOutput } from '@/server/api/admin/data-contracts'
+import { PermissionApi } from '@/server/api/admin/Permission'
+import { ViewApi } from '@/server/api/admin/View'
 import { listToTree } from '@/utils/tree'
 import eventBus from '@/utils/mitt'
 

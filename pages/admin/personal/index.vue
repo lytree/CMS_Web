@@ -3,8 +3,8 @@ import { computed, defineAsyncComponent, getCurrentInstance, onMounted, reactive
 import { storeToRefs } from 'pinia'
 import type { AxiosResponse } from 'axios'
 import { formatAxis } from '@/utils/formatTime'
-import { UserApi } from '@/api/admin/User'
-import type { UserGetBasicOutput } from '@/api/admin/data-contracts'
+import { UserApi } from '@/server/api/admin/User'
+import type { UserGetBasicOutput } from '@/server/api/admin/data-contracts'
 import { useUserInfo } from '@/stores/userInfo'
 import pinia from '@/stores/index'
 
@@ -134,7 +134,7 @@ function onChangePassword() {
 </script>
 
 <template>
-  <div v-loading="state.loading" class="personal layout-pd">
+  <div v-loading="state.loading" class="layout-pd personal">
     <el-row>
       <!-- 个人信息 -->
       <el-col :xs="24" :sm="16">
@@ -300,7 +300,6 @@ function onChangePassword() {
 </template>
 
 <style scoped>
-
 /* 多行文本溢出
   ------------------------------- */
 .personal .personal-user {

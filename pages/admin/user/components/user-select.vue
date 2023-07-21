@@ -1,8 +1,8 @@
 <script lang="ts" setup name="admin/user/components/user-select">
 import { defineAsyncComponent, reactive, ref } from 'vue'
 import { ElTable } from 'element-plus'
-import type { OrgListOutput, PageInputUserGetPageDto, UserGetPageOutput } from '@/api/admin/data-contracts'
-import { UserApi } from '@/api/admin/User'
+import type { OrgListOutput, PageInputUserGetPageDto, UserGetPageOutput } from '@/server/api/admin/data-contracts'
+import { UserApi } from '@/server/api/admin/User'
 
 const props = defineProps({
   title: {

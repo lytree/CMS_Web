@@ -4,8 +4,8 @@ import { NextLoading } from '@/utils/loading'
 import { useRoutesList } from '@/stores/routesList'
 import { useTagsViewRoutes } from '@/stores/tagsViewRoutes'
 
-// import { useMenuApi } from '/@/api/menu/index'
-import { AuthApi } from '@/api/admin/Auth'
+// import { useMenuApi } from '/@/server/api/menu/index'
+import { AuthApi } from '@/server/api/admin/Auth'
 import { listToTree } from '@/utils/tree'
 
 // 后端控制路由
