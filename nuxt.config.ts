@@ -31,7 +31,6 @@ export default defineNuxtConfig({
   elementPlus: {
     icon: 'ElIcon',
     importStyle: 'css',
-    themes: ['dark'],
   },
   experimental: {
     // when using generate, payload js assets included in sw precache manifest

@@ -9,14 +9,11 @@ import setIntroduction from '@/utils/setIconfont'
 import { useTagsViewRoutes } from '@/stores/tagsViewRoutes'
 import { useThemeConfig } from '@/stores/themeConfig'
 
-
 // 引入组件
 const LockScreen = defineAsyncComponent(() => import('@/layouts/admin/lockScreen/index.vue'))
 const Setings = defineAsyncComponent(() => import('@/layouts/admin/navBars/topBar/setings.vue'))
 const CloseFull = defineAsyncComponent(() => import('@/layouts/admin/navBars/topBar/closeFull.vue'))
-const Upgrade = defineAsyncComponent(() => import('@/layouts/admin/upgrade/index.vue'))
-
-
+// const Upgrade = defineAsyncComponent(() => import('@/layouts/admin/upgrade/index.vue'))
 
 const nuxtApp = useNuxtApp()
 // 定义变量内容
@@ -37,7 +34,6 @@ const getLockScreen = computed(() => {
   // 防止锁屏后，刷新出现不相关界面
   return themeConfig.value.isLockScreen ? themeConfig.value.lockScreenTime > 1 : themeConfig.value.lockScreenTime >= 0
 })
-
 
 // 获取全局 i18n
 const getGlobalI18n = computed(() => {
@@ -63,9 +59,8 @@ onMounted(() => {
       document.documentElement.style.cssText = Local.get('themeConfigStyle')
     }
     // 获取缓存中的全屏配置
-    if (Session.get('isTagsViewCurrenFull')) {
+    if (Session.get('isTagsViewCurrenFull'))
       stores.setCurrenFullscreen(Session.get('isTagsViewCurrenFull'))
-    }
   })
 })
 // 页面销毁时，关闭监听布局配置/i18n监听
@@ -79,7 +74,7 @@ watch(
   },
   {
     deep: true,
-  }
+  },
 )
 </script>
 
@@ -87,7 +82,7 @@ watch(
   <el-config-provider :locale="getGlobalI18n">
     <NuxtLoadingIndicator :height="5" :duration="3000" :throttle="400" /> <!-- I'm here -->
     <NuxtPage />
-    <Setings ref="setingsRef" v-show="getLockScreen" />
+    <Setings v-show="getLockScreen" ref="setingsRef" />
     <CloseFull v-if="!themeConfig.isLockScreen" />
   </el-config-provider>
 </template>
