@@ -1,5 +1,5 @@
-import { authDirective } from './directive/authDirective.ts'
-import { dragDirective, wavesDirective } from './directive/customDirective.ts'
+import { authDirective } from './directive/authDirective'
+import { dragDirective, wavesDirective } from './directive/customDirective'
 
 export default defineNuxtPlugin((nuxtApp) => {
   // 用户权限指令

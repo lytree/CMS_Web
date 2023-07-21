@@ -1,6 +1,6 @@
 <script lang="ts" setup name="admin/cache">
 import { getCurrentInstance, onMounted, reactive } from 'vue'
-import { CacheApi } from '@/server/api/admin/Cache'
+// import { CacheApi } from '@/server/api/admin/Cache'
 
 defineProps({
   title: {
@@ -30,13 +30,13 @@ async function onQuery() {
 }
 
 function onClear(row: any) {
-  proxy.$modal
-    .confirmDelete(`确定要清除【${row.description}】缓存?`, { icon: 'ele-Brush' })
-    .then(async () => {
-      await new CacheApi().clear({ cacheKey: row.value }, { loading: true, showSuccessMessage: true })
-      onQuery()
-    })
-    .catch(() => {})
+  // proxy.$modal
+  //   .confirmDelete(`确定要清除【${row.description}】缓存?`, { icon: 'ele-Brush' })
+  //   .then(async () => {
+  //     await new CacheApi().clear({ cacheKey: row.value }, { loading: true, showSuccessMessage: true })
+  //     onQuery()
+  //   })
+  //   .catch(() => {})
 }
 </script>
 

@@ -109,9 +109,9 @@ defineExpose({
           <el-button type="primary" icon="ele-Search" @click="onQuery">
             查询
           </el-button>
-          <!-- <el-button v-auth="'api:admin:dict:add'" type="primary" icon="ele-Plus" @click="onAdd">
+          <el-button v-auth="'api:admin:dict:add'" type="primary" icon="ele-Plus" @click="onAdd">
             新增
-          </el-button> -->
+          </el-button>
         </el-form-item>
       </el-form>
     </el-card>
