@@ -26,7 +26,7 @@ export default defineNuxtConfig({
     vueI18n: './i18n/index.ts', // if you are using custom path, default
   },
   routeRules: {
-    '/admin/**': { ssr: false },
+    '/admin/**': { ssr: false, cors: true },
   },
   elementPlus: {
     icon: 'ElIcon',
@@ -50,7 +50,9 @@ export default defineNuxtConfig({
     },
   },
   colorMode: {
+    preference: 'system',
     classSuffix: '',
+    dataValue: 'theme',
   },
   nitro: {
     esbuild: {

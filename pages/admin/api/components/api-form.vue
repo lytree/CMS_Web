@@ -2,11 +2,10 @@
 import type { PropType } from 'vue'
 import { defineComponent, reactive, ref, toRefs } from 'vue'
 import type { ApiListOutput, ApiUpdateInput } from '@/server/api/admin/data-contracts'
-import { ApiApi } from '@/server/api/admin/Api'
-import eventBus from '@/utils/mitt'
-</script>
 
-<script lang="ts">
+// import { ApiApi } from '@/server/api/admin/Api'
+import eventBus from '@/utils/mitt'
+
 defineProps({
   title: {
     type: String,
@@ -17,7 +16,6 @@ defineProps({
     default: () => [],
   },
 })
-
 const formRef = ref()
 const state = reactive({
   showDialog: false,
@@ -32,8 +30,9 @@ const { form } = toRefs(state)
 // 打开对话框
 async function open(row: any = {}) {
   if (row.id > 0) {
-    const res = await new ApiApi().get({ id: row.id }, { loading: true })
+    // const res = await new ApiApi().get({ id: row.id }, { loading: true })
 
+    const res: any = {}
     if (res?.success) {
       const formData = res.data as ApiUpdateInput
       formData.parentId = formData.parentId && formData.parentId > 0 ? formData.parentId : undefined
@@ -59,18 +58,18 @@ function onSure() {
       return
 
     state.sureLoading = true
-    let res = {} as any
+    const res = {} as any
     state.form.parentId = state.form.parentId && state.form.parentId > 0 ? state.form.parentId : undefined
-    if (state.form.id != undefined && state.form.id > 0) {
-      res = await new ApiApi().update(state.form, { showSuccessMessage: true }).catch(() => {
-        state.sureLoading = false
-      })
-    }
-    else {
-      res = await new ApiApi().add(state.form, { showSuccessMessage: true }).catch(() => {
-        state.sureLoading = false
-      })
-    }
+    // if (state.form.id !== undefined && state.form.id > 0) {
+    //   res = await new ApiApi().update(state.form, { showSuccessMessage: true }).catch(() => {
+    //     state.sureLoading = false
+    //   })
+    // }
+    // else {
+    //   res = await new ApiApi().add(state.form, { showSuccessMessage: true }).catch(() => {
+    //     state.sureLoading = false
+    //   })
+    // }
 
     state.sureLoading = false
 
@@ -84,7 +83,9 @@ function onSure() {
 defineExpose({
   open,
 })
+</script>
 
+<script lang="ts">
 export default defineComponent({
   name: 'admin/api/form',
 })

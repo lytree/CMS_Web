@@ -1,9 +1,10 @@
-<script lang="ts" setup name="admin/api">
+<script lang="ts" setup>
 import { defineAsyncComponent, getCurrentInstance, onBeforeMount, onMounted, reactive, ref } from 'vue'
 import { cloneDeep, isArray } from 'lodash-es'
 import type { ApiListOutput } from '@/server/api/admin/data-contracts'
-import { ApiApi } from '@/server/api/admin/Api'
-import { ApiApi as ApiExtApi } from '@/server/api/admin.extend/Api'
+
+// import { ApiApi } from '@/server/api/admin/Api'
+// import { ApiApi as ApiExtApi } from '@/server/api/admin.extend/Api'
 import { filterTree, listToTree, treeToList } from '@/utils/tree'
 import eventBus from '@/utils/mitt'
 
@@ -43,9 +44,10 @@ onBeforeMount(() => {
 
 async function onQuery() {
   state.loading = true
-  const res = await new ApiApi().getList().catch(() => {
-    state.loading = false
-  })
+  // const res = await new ApiApi().getList().catch(() => {
+  //   state.loading = false
+  // })
+  const res: any = {}
   if (res && res.data && res.data.length > 0) {
     state.apiTreeData = filterTree(listToTree(cloneDeep(res.data)), state.filter.name, {
       filterWhere: (item: any, keyword: string) => {
@@ -72,17 +74,18 @@ function onEdit(row: ApiListOutput) {
 }
 
 function onDelete(row: ApiListOutput) {
-  proxy.$modal
-    .confirmDelete(`确定要删除接口【${row.label}】?`, { type: 'info' })
-    .then(async () => {
-      await new ApiApi().delete({ id: row.id }, { loading: true })
-      onQuery()
-    })
-    .catch(() => {})
+  // proxy.$modal
+  //   .confirmDelete(`确定要删除接口【${row.label}】?`, { type: 'info' })
+  //   .then(async () => {
+  //     await new ApiApi().delete({ id: row.id }, { loading: true })
+  //     onQuery()
+  //   })
+  //   .catch(() => {})
 }
 
 async function syncApi(swaggerResource: any) {
-  const res = await new ApiExtApi().getSwaggerJson(swaggerResource.url, { showErrorMessage: false })
+  // const res = await new ApiExtApi().getSwaggerJson(swaggerResource.url, { showErrorMessage: false })
+  const res: any = {}
   if (!res)
     return
 
@@ -124,7 +127,8 @@ async function syncApi(swaggerResource: any) {
     }
   }
 
-  return await new ApiApi().sync({ apis })
+  // return await new ApiApi().sync({ apis })
+  return {}
 }
 
 function onSync() {
@@ -132,9 +136,10 @@ function onSync() {
   const swaggerResources = ['/admin/swagger-resources']
   const lastSwaggerResourcesIndex = swaggerResources.length - 1
   swaggerResources.forEach(async (swaggerResource, swaggerResourcesIndex) => {
-    const resSwaggerResources = await new ApiExtApi().getSwaggerResources(swaggerResource, { showErrorMessage: false }).catch(() => {
-      state.syncLoading = false
-    })
+    // const resSwaggerResources = await new ApiExtApi().getSwaggerResources(swaggerResource, { showErrorMessage: false }).catch(() => {
+    //   state.syncLoading = false
+    // })
+    const resSwaggerResources = {}
     if (isArray(resSwaggerResources) && (resSwaggerResources?.length as number) > 0) {
       for (let index = 0, len = resSwaggerResources.length; index < len; index++) {
         const swaggerResource = resSwaggerResources[index]
@@ -167,7 +172,7 @@ function onSync() {
           <el-button v-auth="'api:admin:api:add'" type="primary" icon="ele-Plus" @click="onAdd">
             新增
           </el-button>
-          <el-popconfirm title="确定要同步接口" hide-icon width="180" hide-after="0" @confirm="onSync">
+          <el-popconfirm title="确定要同步接口" hide-icon width="180" :hide-after=0 @confirm="onSync">
             <template #reference>
               <el-button v-auth="'api:admin:api:sync'" :loading="state.syncLoading" type="primary" icon="ele-Refresh">
                 同步

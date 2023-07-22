@@ -99,6 +99,7 @@ body,
 html.dark {
   background: #101014;
   color: white;
+
 }
 
 html.light {

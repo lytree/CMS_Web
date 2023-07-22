@@ -206,11 +206,8 @@ function onAddFilterChange(attr: string) {
   setLocalThemeConfig()
 }
 // 4、界面显示 --> 深色模式
-function onAddDarkChange() {
-  const body = document.documentElement as HTMLElement
-  if (getThemeConfig.value.isIsDark)
-    body.setAttribute('data-theme', 'dark')
-  else body.setAttribute('data-theme', '')
+function onAddDarkChange(val: string) {
+  useColorMode().preference = val
 }
 // 4、界面显示 --> 开启水印
 function onWatermarkChange() {
@@ -372,7 +369,13 @@ defineExpose({
             {{ $t('message.layout.fourIsDark') }}
           </div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="getThemeConfig.isIsDark" size="small" @change="onAddDarkChange" />
+            <el-select v-model="getThemeConfig.colorMode" placeholder="请选择" placement="bottom-end" size="default" style="width: 90px" @change="onAddDarkChange">
+              <el-option label="系统默认" value="system" />
+              <el-option label="暗黑模式" value="dark" />
+              <el-option label="浅色模式" value="light" />
+            </el-select>
+
+            <!-- <el-switch v-model="getThemeConfig.isIsDark" size="small" @change="onAddDarkChange" /> -->
           </div>
         </div>
 

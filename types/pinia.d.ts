@@ -76,6 +76,7 @@ declare interface ThemeConfigState {
     isFooter: boolean
     isGrayscale: boolean
     isInvert: boolean
+    colorMode: string
     isIsDark: boolean
     isWatermark: boolean
     watermarkText: string
