@@ -1,4 +1,4 @@
-<script setup lang="ts" name="svgIcon">
+<script setup lang="ts">
 import { computed } from 'vue'
 
 // 定义父组件传过来的值

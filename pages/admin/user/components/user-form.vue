@@ -79,15 +79,15 @@ watch(
   },
 )
 
-async function getOrgs() {
-  const res = await new OrgApi().getList().catch(() => {
-    state.orgTreeData = []
-  })
-  if (res?.success && res.data && res.data.length > 0)
-    state.orgTreeData = listToTree(res.data)
-  else
-    state.orgTreeData = []
-}
+// async function getOrgs() {
+//   const res = await new OrgApi().getList().catch(() => {
+//     state.orgTreeData = []
+//   })
+//   if (res?.success && res.data && res.data.length > 0)
+//     state.orgTreeData = listToTree(res.data)
+//   else
+//     state.orgTreeData = []
+// }
 
 async function getRoles() {
   const res = await new RoleApi().getList().catch(() => {

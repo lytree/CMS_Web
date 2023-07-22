@@ -1,7 +1,12 @@
 // 申明外部 npm 插件模块
 declare module 'vue-grid-layout'
 declare module 'qrcodejs2-fixes'
-declare module 'splitpanes'
+declare module 'splitpanes' {
+  let Splitpanes: any;
+  let Pane: any;
+
+  export { Splitpanes, Pane }
+}
 declare module 'js-cookie'
 declare module '@wangeditor/editor-for-vue'
 // declare module 'js-table2excel'

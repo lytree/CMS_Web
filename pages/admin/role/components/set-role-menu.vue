@@ -3,7 +3,8 @@ import { computed, getCurrentInstance, reactive, ref } from 'vue'
 import { ElTree } from 'element-plus'
 import { cloneDeep } from 'lodash-es'
 import type { PermissionAssignInput, RoleGetListOutput } from '@/server/api/admin/data-contracts'
-import { PermissionApi } from '@/server/api/admin/Permission'
+
+// import { PermissionApi } from '@/server/api/admin/Permission'
 import { listToTree } from '@/utils/tree'
 
 const props = defineProps({
@@ -31,7 +32,8 @@ const { proxy } = getCurrentInstance() as any
 const permissionTreeRef = ref<InstanceType<typeof ElTree>>()
 
 async function getRolePermissionList() {
-  const res = await new PermissionApi().getRolePermissionList({ roleId: state.roleId })
+  // const res = await new PermissionApi().getRolePermissionList({ roleId: state.roleId })
+  const res: any = {}
   state.checkedKeys = res?.success ? (res.data as never[]) : []
 }
 
@@ -54,9 +56,10 @@ function close() {
 async function onQuery() {
   state.loading = true
 
-  const res = await new PermissionApi().getPermissionList().catch(() => {
-    state.loading = false
-  })
+  // const res = await new PermissionApi().getPermissionList().catch(() => {
+  //   state.loading = false
+  // })
+  const res: any = {}
   if (res && res.data && res.data.length > 0)
     state.permissionTreeData = listToTree(cloneDeep(res.data))
   else
@@ -100,9 +103,9 @@ defineExpose({
     :close-on-click-modal="false" :close-on-press-escape="false" width="780px"
   >
     <div>
-      <ElTree
-        ref="permissionTreeRef" :data="state.permissionTreeData" node-key="id" show-checkbox highlight-current
-        default-expand-all check-on-click-node :expand-on-click-node="false" :props="{ class: customNodeClass }"
+      <el-tree
+        ref="permissionTreeRef" :data="state.permissionTreeData" node-key="id"
+        show-checkbox check-on-click-node highlight-current default-expand-all :expand-on-click-node="false" :props="{ class: customNodeClass }"
         :default-checked-keys="state.checkedKeys"
       />
     </div>

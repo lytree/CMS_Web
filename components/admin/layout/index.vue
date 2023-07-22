@@ -19,7 +19,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div class="my-layout w-full h-full" :style="`position: ${state.isMobile ? 'relative' : 'absolute'}`">
+  <div class="my-layout h-full w-full" :style="`position: ${state.isMobile ? 'relative' : 'absolute'}`">
     <Splitpanes :horizontal="state.isMobile" class="default-theme">
       <slot />
     </Splitpanes>

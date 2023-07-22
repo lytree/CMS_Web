@@ -1,7 +1,8 @@
 <script lang="ts" setup name="my-input-code">
-import { computed, defineAsyncComponent, reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { isMobilePhone } from '@/utils/test'
+
 // import { CaptchaApi } from '@/server/api/admin/Captcha'
 
 const props = defineProps({

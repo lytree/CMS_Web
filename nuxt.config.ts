@@ -3,7 +3,8 @@ import { appDescription } from './constants/index'
 export default defineNuxtConfig({
   //  #region 组件名自定义
   components: [
-    { path: '~/components/common', prefix: 'l' },
+    { path: '~/components/common', prefix: 'c' },
+    { path: '~/components/admin', prefix: 'a' },
     '~/components',
   ],
   // #endregion

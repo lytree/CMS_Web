@@ -6,7 +6,6 @@ import type { DictTypeGetPageOutput } from '@/server/api/admin/data-contracts'
 // 引入组件
 const DictType = defineAsyncComponent(() => import('./dict-type.vue'))
 const Dict = defineAsyncComponent(() => import('./dict.vue'))
-const MyLayout = defineAsyncComponent(() => import('@/components/l-layout/index.vue'))
 
 const dictRef = ref()
 
@@ -16,14 +15,14 @@ function onChange(data: DictTypeGetPageOutput) {
 </script>
 
 <template>
-  <MyLayout>
+  <a-layout>
     <Pane size="50" min-size="30" max-size="70">
       <DictType @change="onChange" />
     </Pane>
     <Pane>
       <Dict ref="dictRef" />
     </Pane>
-  </MyLayout>
+  </a-layout>
 </template>
 
 <style scoped></style>

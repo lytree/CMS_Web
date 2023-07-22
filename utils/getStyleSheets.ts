@@ -2,75 +2,76 @@ import { nextTick } from 'vue'
 import * as svg from '@element-plus/icons-vue'
 
 // 获取阿里字体图标
-const getAlicdnIconfont = () => {
+function getAlicdnIconfont() {
   return new Promise((resolve, reject) => {
     nextTick(() => {
       const styles: any = document.styleSheets
-      let sheetsList = []
-      let sheetsIconList = []
+      const sheetsList = []
+      const sheetsIconList = []
       for (let i = 0; i < styles.length; i++) {
-        if (styles[i].href && styles[i].href.indexOf('at.alicdn.com') > -1) {
+        if (styles[i].href && styles[i].href.includes('at.alicdn.com'))
           sheetsList.push(styles[i])
-        }
       }
       for (let i = 0; i < sheetsList.length; i++) {
         for (let j = 0; j < sheetsList[i].cssRules.length; j++) {
-          if (sheetsList[i].cssRules[j].selectorText && sheetsList[i].cssRules[j].selectorText.indexOf('.icon-') > -1) {
+          if (sheetsList[i].cssRules[j].selectorText && sheetsList[i].cssRules[j].selectorText.includes('.icon-')) {
             sheetsIconList.push(
-              `${sheetsList[i].cssRules[j].selectorText.substring(1, sheetsList[i].cssRules[j].selectorText.length).replace(/\:\:before/gi, '')}`
+              `${sheetsList[i].cssRules[j].selectorText.substring(1, sheetsList[i].cssRules[j].selectorText.length).replace(/\:\:before/gi, '')}`,
             )
           }
         }
       }
-      if (sheetsIconList.length > 0) resolve(sheetsIconList)
+      if (sheetsIconList.length > 0)
+        resolve(sheetsIconList)
       else reject('未获取到值，请刷新重试')
     })
   })
 }
 
 // 初始化获取 css 样式，获取 element plus 自带 svg 图标，增加了 ele- 前缀，使用时：ele-Aim
-const getElementPlusIconfont = () => {
+function getElementPlusIconfont() {
   return new Promise((resolve, reject) => {
     nextTick(() => {
       const icons = svg as any
       const sheetsIconList = []
-      for (const i in icons) {
+      for (const i in icons)
         sheetsIconList.push(`ele-${icons[i].name}`)
-      }
-      if (sheetsIconList.length > 0) resolve(sheetsIconList)
+
+      if (sheetsIconList.length > 0)
+        resolve(sheetsIconList)
       else reject('未获取到值，请刷新重试')
     })
   })
 }
 
 // 初始化获取 css 样式，这里使用 fontawesome 的图标
-const getAwesomeIconfont = () => {
+function getAwesomeIconfont() {
   return new Promise((resolve, reject) => {
     nextTick(() => {
       const styles: any = document.styleSheets
-      let sheetsList = []
-      let sheetsIconList = []
+      const sheetsList = []
+      const sheetsIconList = []
       for (let i = 0; i < styles.length; i++) {
-        if (styles[i].href && styles[i].href.indexOf('font-awesome') > -1) {
+        if (styles[i].href && styles[i].href.includes('font-awesome'))
           sheetsList.push(styles[i])
-        }
       }
       for (let i = 0; i < sheetsList.length; i++) {
         for (let j = 0; j < sheetsList[i].cssRules.length; j++) {
           if (
-            sheetsList[i].cssRules[j].selectorText &&
-            sheetsList[i].cssRules[j].selectorText.indexOf('.fa-') === 0 &&
-            sheetsList[i].cssRules[j].selectorText.indexOf(',') === -1
+            sheetsList[i].cssRules[j].selectorText
+            && sheetsList[i].cssRules[j].selectorText.indexOf('.fa-') === 0
+            && !sheetsList[i].cssRules[j].selectorText.includes(',')
           ) {
             if (/::before/.test(sheetsList[i].cssRules[j].selectorText)) {
               sheetsIconList.push(
-                `${sheetsList[i].cssRules[j].selectorText.substring(1, sheetsList[i].cssRules[j].selectorText.length).replace(/\:\:before/gi, '')}`
+                `${sheetsList[i].cssRules[j].selectorText.substring(1, sheetsList[i].cssRules[j].selectorText.length).replace(/\:\:before/gi, '')}`,
               )
             }
           }
         }
       }
-      if (sheetsIconList.length > 0) resolve(sheetsIconList.reverse())
+      if (sheetsIconList.length > 0)
+        resolve(sheetsIconList.reverse())
       else reject('未获取到值，请刷新重试')
     })
   })

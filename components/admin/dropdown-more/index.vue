@@ -1,19 +1,8 @@
-<template>
-  <el-dropdown style="margin-left: 10px" v-bind="$attrs">
-    <el-button size="small" text type="primary"
-      >{{ innerButtonText }}<el-icon class="el-icon--right"><component :is="innerIcon" /></el-icon
-    ></el-button>
-    <template #dropdown>
-      <slot name="dropdown" />
-    </template>
-  </el-dropdown>
-</template>
-
 <script lang="ts">
-import { defineComponent, computed, PropType } from 'vue'
+import type { PropType } from 'vue'
+import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'MyDropdownMore',
   props: {
     iconOnly: {
       type: Boolean,
@@ -45,4 +34,17 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss"></style>
+<template>
+  <el-dropdown style="margin-left: 10px" v-bind="$attrs">
+    <el-button size="small" text type="primary">
+      {{ innerButtonText }}<el-icon class="el-icon--right">
+        <component :is="innerIcon" />
+      </el-icon>
+    </el-button>
+    <template #dropdown>
+      <slot name="dropdown" />
+    </template>
+  </el-dropdown>
+</template>
+
+<style scoped></style>

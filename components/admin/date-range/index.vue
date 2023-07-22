@@ -1,22 +1,8 @@
-<template>
-  <el-date-picker
-    v-model="dateRange"
-    format="YYYY-MM-DD"
-    type="daterange"
-    start-placeholder="开始时间"
-    end-placeholder="结束时间"
-    :clearable="false"
-    :shortcuts="shortcuts"
-    @change="change"
-  ></el-date-picker>
-</template>
-
 <script lang="ts">
 import dayjs from 'dayjs'
 import { defineComponent, reactive, toRefs } from 'vue'
 
 export default defineComponent({
-  name: 'MyDateRange',
   setup() {
     const state = reactive({
       dateRange: [dayjs().subtract(1, 'months').startOf('day'), dayjs().endOf('day')],
@@ -94,3 +80,16 @@ export default defineComponent({
   },
 })
 </script>
+
+<template>
+  <el-date-picker
+    v-model="dateRange"
+    format="YYYY-MM-DD"
+    type="daterange"
+    start-placeholder="开始时间"
+    end-placeholder="结束时间"
+    :clearable="false"
+    :shortcuts="shortcuts"
+    @change="change"
+  />
+</template>
