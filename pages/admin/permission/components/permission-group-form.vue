@@ -1,9 +1,10 @@
 <script lang="ts" setup name="admin/permission/permission-group-form">
 import type { PropType } from 'vue'
-import { defineAsyncComponent, getCurrentInstance, reactive, ref, toRefs } from 'vue'
+import { getCurrentInstance, reactive, ref, toRefs } from 'vue'
 import type { PermissionListOutput, PermissionUpdateGroupInput, ViewListOutput } from '@/server/api/admin/data-contracts'
-import { PermissionApi } from '@/server/api/admin/Permission'
-import { ViewApi } from '@/server/api/admin/View'
+
+// import { PermissionApi } from '@/server/api/admin/Permission'
+// import { ViewApi } from '@/server/api/admin/View'
 import { listToTree } from '@/utils/tree'
 import eventBus from '@/utils/mitt'
 
@@ -19,7 +20,6 @@ defineProps({
 })
 
 // 引入组件
-const MySelectIcon = defineAsyncComponent(() => import('//components/my-select-icon/index.vue'))
 
 const { proxy } = getCurrentInstance() as any
 
@@ -33,7 +33,8 @@ const state = reactive({
 const { form } = toRefs(state)
 
 async function getViews() {
-  const res = await new ViewApi().getList()
+  // const res = await new ViewApi().getList()
+  const res: any = {}
   if (res?.success && res.data && res.data.length > 0)
     state.viewTreeData = listToTree(res.data) as ViewListOutput[]
   else
@@ -45,10 +46,10 @@ async function open(row: any = {}) {
   proxy.$modal.loading()
   await getViews()
   if (row.id > 0) {
-    const res = await new PermissionApi().getGroup({ id: row.id }).catch(() => {
-      proxy.$modal.closeLoading()
-    })
-
+    // const res = await new PermissionApi().getGroup({ id: row.id }).catch(() => {
+    //   proxy.$modal.closeLoading()
+    // })
+    const res: any = {}
     if (res?.success) {
       const formData = res.data as PermissionUpdateGroupInput
       formData.parentId = formData.parentId && formData.parentId > 0 ? formData.parentId : undefined
@@ -82,16 +83,16 @@ function onSure() {
     state.sureLoading = true
     let res = {} as any
     state.form.parentId = state.form.parentId && state.form.parentId > 0 ? state.form.parentId : undefined
-    if (state.form.id != undefined && state.form.id > 0) {
-      res = await new PermissionApi().updateGroup(state.form, { showSuccessMessage: true }).catch(() => {
-        state.sureLoading = false
-      })
-    }
-    else {
-      res = await new PermissionApi().addGroup(state.form, { showSuccessMessage: true }).catch(() => {
-        state.sureLoading = false
-      })
-    }
+    // if (state.form.id != undefined && state.form.id > 0) {
+    //   res = await new PermissionApi().updateGroup(state.form, { showSuccessMessage: true }).catch(() => {
+    //     state.sureLoading = false
+    //   })
+    // }
+    // else {
+    //   res = await new PermissionApi().addGroup(state.form, { showSuccessMessage: true }).catch(() => {
+    //     state.sureLoading = false
+    //   })
+    // }
 
     state.sureLoading = false
 
@@ -183,7 +184,7 @@ defineExpose({
           </el-col>
           <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
             <el-form-item label="图标" prop="icon">
-              <MySelectIcon v-model="form.icon" clearable />
+              <l-select-icon v-model="form.icon" clearable />
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">

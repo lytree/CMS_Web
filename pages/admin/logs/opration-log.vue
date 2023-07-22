@@ -3,7 +3,7 @@ import { onMounted, reactive, ref } from 'vue'
 import dayjs from 'dayjs'
 import type { TableInstance } from 'element-plus'
 import type { OprationLogListOutput, PageInputLogGetPageDto } from '@/server/api/admin/data-contracts'
-import { OprationLogApi } from '@/server/api/admin/OprationLog'
+// import { OprationLogApi } from '@/server/api/admin/OprationLog'
 
 const tableRef = ref<TableInstance>()
 
@@ -33,10 +33,10 @@ function formatterTime(row: any, column: any, cellValue: any) {
 async function onQuery() {
   state.loading = true
   state.pageInput.filter = state.filterModel
-  const res = await new OprationLogApi().getPage(state.pageInput).catch(() => {
-    state.loading = false
-  })
-
+  // const res = await new OprationLogApi().getPage(state.pageInput).catch(() => {
+  //   state.loading = false
+  // })
+  const res:any = {}
   state.oprationLogListData = res?.data?.list ?? []
   state.total = res?.data?.total ?? 0
   state.loading = false

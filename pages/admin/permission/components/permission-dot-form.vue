@@ -3,8 +3,8 @@ import type { PropType } from 'vue'
 import { getCurrentInstance, reactive, ref, toRefs } from 'vue'
 import { cloneDeep, replace, trimStart } from 'lodash-es'
 import type { ApiListOutput, PermissionListOutput, PermissionUpdateDotInput } from '@/server/api/admin/data-contracts'
-import { PermissionApi } from '@/server/api/admin/Permission'
-import { ApiApi } from '@/server/api/admin/Api'
+// import { PermissionApi } from '@/server/api/admin/Permission'
+// import { ApiApi } from '@/server/api/admin/Api'
 import { listToTree, treeToList } from '@/utils/tree'
 import eventBus from '@/utils/mitt'
 
@@ -99,16 +99,16 @@ function onSure() {
     state.sureLoading = true
     let res = {} as any
     state.form.parentId = state.form.parentId && state.form.parentId > 0 ? state.form.parentId : undefined
-    if (state.form.id != undefined && state.form.id > 0) {
-      res = await new PermissionApi().updateDot(state.form, { showSuccessMessage: true }).catch(() => {
-        state.sureLoading = false
-      })
-    }
-    else {
-      res = await new PermissionApi().addDot(state.form, { showSuccessMessage: true }).catch(() => {
-        state.sureLoading = false
-      })
-    }
+    // if (state.form.id != undefined && state.form.id > 0) {
+    //   res = await new PermissionApi().updateDot(state.form, { showSuccessMessage: true }).catch(() => {
+    //     state.sureLoading = false
+    //   })
+    // }
+    // else {
+    //   res = await new PermissionApi().addDot(state.form, { showSuccessMessage: true }).catch(() => {
+    //     state.sureLoading = false
+    //   })
+    // }
 
     state.sureLoading = false
 
@@ -128,9 +128,9 @@ defineExpose({
   <div>
     <el-dialog
       v-model="state.showDialog"
-      destroy-on-close
+
       :title="title"
-      draggable
+      draggable destroy-on-close
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       width="600px"
@@ -143,12 +143,8 @@ defineExpose({
                 v-model="form.parentId"
                 :data="permissionTreeData"
                 node-key="id"
-                check-strictly
-                default-expand-all
-                render-after-expand
-                fit-input-width
-                clearable
-                filterable
+
+                clearable check-strictly render-after-expand fit-input-width filterable default-expand-all
                 class="w100"
               />
             </el-form-item>

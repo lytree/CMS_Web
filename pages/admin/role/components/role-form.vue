@@ -3,7 +3,8 @@ import type { PropType } from 'vue'
 import { reactive, ref, toRefs } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import type { RoleGetListOutput, RoleUpdateInput } from '@/server/api/admin/data-contracts'
-import { RoleApi } from '@/server/api/admin/Role'
+
+// import { RoleApi } from '@/server/api/admin/Role'
 import eventBus from '@/utils/mitt'
 
 defineProps({
@@ -54,18 +55,18 @@ function onSure() {
       return
 
     state.sureLoading = true
-    let res = {} as any
+    const res = {} as any
     state.form.parentId = state.form.parentId && state.form.parentId > 0 ? state.form.parentId : undefined
-    if (state.form.id != undefined && state.form.id > 0) {
-      res = await new RoleApi().update(state.form, { showSuccessMessage: true }).catch(() => {
-        state.sureLoading = false
-      })
-    }
-    else {
-      res = await new RoleApi().add(state.form, { showSuccessMessage: true }).catch(() => {
-        state.sureLoading = false
-      })
-    }
+    // if (state.form.id != undefined && state.form.id > 0) {
+    //   res = await new RoleApi().update(state.form, { showSuccessMessage: true }).catch(() => {
+    //     state.sureLoading = false
+    //   })
+    // }
+    // else {
+    //   res = await new RoleApi().add(state.form, { showSuccessMessage: true }).catch(() => {
+    //     state.sureLoading = false
+    //   })
+    // }
 
     state.sureLoading = false
 

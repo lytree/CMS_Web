@@ -1,4 +1,4 @@
-<script setup lang="ts" name="example/home">
+<script setup lang="ts">
 import { markRaw, nextTick, onActivated, onMounted, reactive, ref, watch } from 'vue'
 import * as echarts from 'echarts'
 import { storeToRefs } from 'pinia'

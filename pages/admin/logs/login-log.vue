@@ -2,7 +2,8 @@
 import { onMounted, reactive } from 'vue'
 import dayjs from 'dayjs'
 import type { LoginLogListOutput, PageInputLogGetPageDto } from '@/server/api/admin/data-contracts'
-import { LoginLogApi } from '@/server/api/admin/LoginLog'
+
+// import { LoginLogApi } from '@/server/api/admin/LoginLog'
 
 const state = reactive({
   loading: false,
@@ -30,10 +31,10 @@ function formatterTime(row: any, column: any, cellValue: any) {
 async function onQuery() {
   state.loading = true
   state.pageInput.filter = state.filterModel
-  const res = await new LoginLogApi().getPage(state.pageInput).catch(() => {
-    state.loading = false
-  })
-
+  // const res = await new LoginLogApi().getPage(state.pageInput).catch(() => {
+  //   state.loading = false
+  // })
+  const res: any = {}
   state.loginLogListData = res?.data?.list ?? []
   state.total = res?.data?.total ?? 0
   state.loading = false

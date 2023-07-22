@@ -2,7 +2,8 @@
 import { defineAsyncComponent, getCurrentInstance, onBeforeMount, onMounted, reactive, ref } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import type { PermissionListOutput } from '@/server/api/admin/data-contracts'
-import { PermissionApi } from '@/server/api/admin/Permission'
+
+// import { PermissionApi } from '@/server/api/admin/Permission'
 import { filterTree, listToTree, treeToList } from '@/utils/tree'
 import eventBus from '@/utils/mitt'
 import { auth } from '@/utils/authFunction'
@@ -47,9 +48,10 @@ onBeforeMount(() => {
 
 async function onQuery() {
   state.loading = true
-  const res = await new PermissionApi().getList().catch(() => {
-    state.loading = false
-  })
+  // const res = await new PermissionApi().getList().catch(() => {
+  //   state.loading = false
+  // })
+  const res: any = {}
   if (res && res.data && res.data.length > 0) {
     state.permissionTreeData = filterTree(listToTree(cloneDeep(res.data)), state.filter.name, {
       filterWhere: (item: any, keyword: string) => {
@@ -102,13 +104,13 @@ function onEdit(row: PermissionListOutput) {
 }
 
 function onDelete(row: PermissionListOutput) {
-  proxy.$modal
-    .confirmDelete(`确定要删除${row.type === 1 ? '分组' : row.type === 2 ? '菜单' : row.type === 3 ? '权限点' : ''}【${row.label}】?`)
-    .then(async () => {
-      await new PermissionApi().delete({ id: row.id }, { loading: true })
-      onQuery()
-    })
-    .catch(() => {})
+  // proxy.$modal
+  //   .confirmDelete(`确定要删除${row.type === 1 ? '分组' : row.type === 2 ? '菜单' : row.type === 3 ? '权限点' : ''}【${row.label}】?`)
+  //   .then(async () => {
+  //     await new PermissionApi().delete({ id: row.id }, { loading: true })
+  //     onQuery()
+  //   })
+  //   .catch(() => {})
 }
 </script>
 

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: false,
   middleware: [
     function (to, from) {
       if (to.path === '/')

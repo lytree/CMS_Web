@@ -7,10 +7,6 @@ import logoMini from '/assets/logo-mini.svg'
 import loginMain from '/assets/login-main.svg'
 import loginBg from '/assets/login-bg.svg'
 
-definePageMeta({
-  layout: false,
-})
-
 // 引入组件
 const Account = defineAsyncComponent(() => import('./component/account.vue'))
 const Mobile = defineAsyncComponent(() => import('./component/mobile.vue'))
@@ -31,14 +27,13 @@ const getThemeConfig = computed(() => {
 // 页面加载时
 onMounted(() => {
   NextLoading.done()
-  console.log(useRouter().getRoutes())
 })
 </script>
 
 <template>
   <div>
-    <NuxtLayout name="blank">
-      <el-scrollbar>
+    <NuxtLayout name="blank" class="h-full w-full">
+      <el-scrollbar class="h-full w-full">
         <div class="login-container flex">
           <div class="login-left">
             <div class="login-left-logo">

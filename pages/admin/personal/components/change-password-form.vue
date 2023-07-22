@@ -1,7 +1,8 @@
 <script lang="ts" setup name="admin/personal/change-password-form">
 import { reactive, ref, toRefs } from 'vue'
 import type { UserChangePasswordInput } from '@/server/api/admin/data-contracts'
-import { UserApi } from '@/server/api/admin/User'
+
+// import { UserApi } from '@/server/api/admin/User'
 
 defineProps({
   title: {
@@ -55,9 +56,10 @@ function onSure() {
       return
 
     state.sureLoading = true
-    const res = await new UserApi().changePassword(state.form, { showSuccessMessage: true }).catch(() => {
-      state.sureLoading = false
-    })
+    // const res = await new UserApi().changePassword(state.form, { showSuccessMessage: true }).catch(() => {
+    //   state.sureLoading = false
+    // })
+    const res: any = {}
     state.sureLoading = false
 
     if (res?.success)

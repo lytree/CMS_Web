@@ -2,7 +2,8 @@
 import { computed, defineAsyncComponent, getCurrentInstance, onBeforeMount, onMounted, reactive, ref } from 'vue'
 import dayjs from 'dayjs'
 import type { FileGetPageOutput, PageInputFileGetPageDto } from '@/server/api/admin/data-contracts'
-import { FileApi } from '@/server/api/admin/File'
+
+// import { FileApi } from '@/server/api/admin/File'
 import eventBus from '@/utils/mitt'
 import { isImage } from '@/utils/test'
 import commonFunction from '@/utils/commonFunction'
@@ -61,10 +62,10 @@ function getInitialIndex(imgUrl: string) {
 
 async function onQuery() {
   state.loading = true
-  const res = await new FileApi().getPage({ ...state.pageInput, filter: state.filterModel }).catch(() => {
-    state.loading = false
-  })
-
+  // const res = await new FileApi().getPage({ ...state.pageInput, filter: state.filterModel }).catch(() => {
+  //   state.loading = false
+  // })
+  const res: any = {}
   state.fileListData = res?.data?.list ?? []
   state.total = res?.data?.total ?? 0
   state.loading = false
@@ -85,13 +86,13 @@ function onUpload() {
 }
 
 function onDelete(row: FileGetPageOutput) {
-  proxy.$modal
-    .confirmDelete(`确定要删除文件【${row.fileName}${row.extension}】?`)
-    .then(async () => {
-      await new FileApi().delete({ id: row.id as number }, { loading: true, showSuccessMessage: true })
-      onQuery()
-    })
-    .catch(() => {})
+  // proxy.$modal
+  //   .confirmDelete(`确定要删除文件【${row.fileName}${row.extension}】?`)
+  //   .then(async () => {
+  //     await new FileApi().delete({ id: row.id as number }, { loading: true, showSuccessMessage: true })
+  //     onQuery()
+  //   })
+  //   .catch(() => {})
 }
 </script>
 

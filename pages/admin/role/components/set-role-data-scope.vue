@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, defineAsyncComponent, reactive, ref, toRefs } from 'vue'
-import type { RoleGetListOutput, RoleSetDataScopeInput } from '@/server/api/admin/data-contracts'
-import { RoleApi } from '@/server/api/admin/Role'
+import type { RoleGetListOutput } from '@/server/api/admin/data-contracts'
+// import { RoleApi } from '@/server/api/admin/Role'
 
 const props = defineProps({
   title: {
@@ -25,7 +25,7 @@ const state = reactive({
   roleId: 0 as number | undefined,
   roleName: '' as string | undefined | null,
   checkedKeys: [] as number[] | undefined | null,
-  form: {} as RoleSetDataScopeInput,
+  // form: {} as RoleSetDataScopeInput,
   dataScopeList: [
     { label: '全部', value: 1 },
     { label: '本部门和下级部门', value: 2 },
@@ -35,7 +35,7 @@ const state = reactive({
   ],
 })
 
-const { form } = toRefs(state)
+// const { form } = toRefs(state)
 
 // 打开对话框
 async function open(role: RoleGetListOutput) {
@@ -95,10 +95,10 @@ defineExpose({
               <el-option v-for="item in state.dataScopeList" :key="item.value" :label="item.label" :value="item.value" />
             </el-select>
 
-            <OrgMenu
+            <!-- <OrgMenu
               v-show="form.dataScope === 5" ref="orgRef" v-model="form.orgIds" show-checkbox check-on-click-node
               :default-checked-keys="form.orgIds" class="w100"
-            />
+            /> -->
           </el-form-item>
         </el-col>
       </el-row>

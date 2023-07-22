@@ -2,8 +2,9 @@
 import type { PropType } from 'vue'
 import { defineAsyncComponent, getCurrentInstance, reactive, ref, toRefs } from 'vue'
 import type { PermissionListOutput, PermissionUpdateMenuInput, ViewListOutput } from '@/server/api/admin/data-contracts'
-import { PermissionApi } from '@/server/api/admin/Permission'
-import { ViewApi } from '@/server/api/admin/View'
+
+// import { PermissionApi } from '@/server/api/admin/Permission'
+// import { ViewApi } from '@/server/api/admin/View'
 import { listToTree } from '@/utils/tree'
 import eventBus from '@/utils/mitt'
 
@@ -33,7 +34,8 @@ const state = reactive({
 const { form } = toRefs(state)
 
 async function getViews() {
-  const res = await new ViewApi().getList()
+  // const res = await new ViewApi().getList()
+  const res: any = {}
   if (res?.success && res.data && res.data.length > 0)
     state.viewTreeData = listToTree(res.data) as ViewListOutput[]
   else
@@ -47,10 +49,10 @@ async function open(row: any = {}) {
   await getViews()
 
   if (row.id > 0) {
-    const res = await new PermissionApi().getMenu({ id: row.id }).catch(() => {
-      proxy.$modal.closeLoading()
-    })
-
+    // const res = await new PermissionApi().getMenu({ id: row.id }).catch(() => {
+    //   proxy.$modal.closeLoading()
+    // })
+    const res: any = {}
     if (res?.success) {
       const formData = res.data as PermissionUpdateMenuInput
       formData.parentId = formData.parentId && formData.parentId > 0 ? formData.parentId : undefined
@@ -93,18 +95,18 @@ function onSure() {
       return
 
     state.sureLoading = true
-    let res = {} as any
+    const res = {} as any
     state.form.parentId = state.form.parentId && state.form.parentId > 0 ? state.form.parentId : undefined
-    if (state.form.id != undefined && state.form.id > 0) {
-      res = await new PermissionApi().updateMenu(state.form, { showSuccessMessage: true }).catch(() => {
-        state.sureLoading = false
-      })
-    }
-    else {
-      res = await new PermissionApi().addMenu(state.form, { showSuccessMessage: true }).catch(() => {
-        state.sureLoading = false
-      })
-    }
+    // if (state.form.id != undefined && state.form.id > 0) {
+    //   res = await new PermissionApi().updateMenu(state.form, { showSuccessMessage: true }).catch(() => {
+    //     state.sureLoading = false
+    //   })
+    // }
+    // else {
+    //   res = await new PermissionApi().addMenu(state.form, { showSuccessMessage: true }).catch(() => {
+    //     state.sureLoading = false
+    //   })
+    // }
 
     state.sureLoading = false
 
