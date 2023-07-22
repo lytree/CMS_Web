@@ -3,10 +3,9 @@ import { computed, defineAsyncComponent, getCurrentInstance, onMounted, reactive
 import { storeToRefs } from 'pinia'
 import type { AxiosResponse } from 'axios'
 import { formatAxis } from '@/utils/formatTime'
-import { UserApi } from '@/server/api/admin/User'
+// import { UserApi } from '@/server/api/admin/User'
 import type { UserGetBasicOutput } from '@/server/api/admin/data-contracts'
 import { useUserInfo } from '@/stores/userInfo'
-import pinia from '@/stores/index'
 
 // 引入组件
 const ChangePasswordForm = defineAsyncComponent(() => import('./components/change-password-form.vue'))
@@ -14,7 +13,7 @@ const ChangePasswordForm = defineAsyncComponent(() => import('./components/chang
 const { proxy } = getCurrentInstance() as any
 const changePasswordFormRef = ref()
 const formRef = ref()
-const storesUserInfo = useUserInfo(pinia)
+const storesUserInfo = useUserInfo(usePinia())
 const { userInfos } = storeToRefs(storesUserInfo)
 
 // 定义变量内容

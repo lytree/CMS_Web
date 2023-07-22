@@ -374,7 +374,7 @@ defineExpose({
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .captcha {
   position: relative;
   user-select: none;
@@ -382,15 +382,18 @@ defineExpose({
   flex-direction: column;
   align-items: center;
 }
+
 .captcha__main {
   width: 100%;
   height: calc(var(--my-captcha-width) * (43 / 69));
   position: relative;
-  background: rgb(244, 245, 246);
+  background: #f4f5f6;
 }
+
 .captcha_background {
   width: 100%;
 }
+
 .captcha_slider {
   position: absolute;
   top: 0;
@@ -398,6 +401,7 @@ defineExpose({
   display: block;
   height: 100%;
 }
+
 .captcha_message {
   position: absolute;
   left: 0px;
@@ -413,11 +417,13 @@ defineExpose({
   align-items: center;
   flex-direction: column;
 }
+
 .captcha_message__icon {
   width: 28px;
   height: 28px;
   margin: 0px auto;
 }
+
 .captcha_message__icon--loadding {
   border-radius: 50%;
   width: 24px;
@@ -428,20 +434,24 @@ defineExpose({
   background-position: center center;
   background-repeat: no-repeat;
 }
+
 .captcha_message.loadding {
-  background-color: rgb(244 245 246);
+  background-color: #f4f5f6;
 }
+
 .captcha_message__text {
   padding: 10px;
-  color: rgb(255, 255, 255);
+  color: white;
   display: inline-block;
   text-align: center;
   max-width: 200px;
   font-size: 14px;
 }
+
 .captcha_message.loadding .captcha_message__text {
-  color: rgb(202, 202, 202);
+  color: #cacaca;
 }
+
 .captcha__bar {
   position: relative;
   text-align: center;
@@ -450,12 +460,14 @@ defineExpose({
   margin-top: 5px;
   border: 1px solid #dcdfe6;
 }
+
 .captcha_progress_bar {
   position: absolute;
   top: 0px;
   left: 0px;
   width: 0;
 }
+
 .captcha_progress_bar__text {
   position: absolute;
   top: 0px;
@@ -467,16 +479,7 @@ defineExpose({
   user-select: none;
   -o-user-select: none;
   -ms-user-select: none;
-  background: -webkit-gradient(
-    linear,
-    left top,
-    right top,
-    color-stop(0, var(--textColor)),
-    color-stop(0.4, var(--textColor)),
-    color-stop(0.5, #fff),
-    color-stop(0.6, var(--textColor)),
-    color-stop(1, var(--textColor))
-  );
+  background: -webkit-gradient(linear, left top, right top, color-stop(0, var(--textColor)), color-stop(0.4, var(--textColor)), color-stop(0.5, #fff), color-stop(0.6, var(--textColor)), color-stop(1, var(--textColor)));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -webkit-text-size-adjust: none;
@@ -489,7 +492,7 @@ defineExpose({
   top: 0px;
   left: 0px;
   cursor: move;
-  background: rgb(255, 255, 255);
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -503,21 +506,21 @@ defineExpose({
   align-items: center;
   line-height: 20px;
   min-height: 20px;
-  color: rgb(80, 80, 80);
+  color: #505050;
   position: absolute;
   top: 0px;
   right: 0px;
   opacity: 0.8;
   background: rgba(0, 0, 0, 0.12);
   padding: 0px 4px;
-  &:hover {
-    opacity: 1;
-    background: rgba(0, 0, 0, 0.2);
-  }
+}
+.captcha__actions:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .captcha__action__text {
-  color: rgb(80, 80, 80);
+  color: #505050;
   font-size: 14px !important;
 }
 
@@ -532,9 +535,11 @@ defineExpose({
   left: 0px !important;
   transition: left 0.5s;
 }
+
 .goKeep {
   transition: left 0.2s;
 }
+
 .goFirst2 {
   width: 0px !important;
   transition: width 0.5s;
@@ -556,7 +561,6 @@ defineExpose({
     background-position: var(--pwidth) 0;
   }
 }
-
 @keyframes turn {
   0% {
     -webkit-transform: rotate(0deg);

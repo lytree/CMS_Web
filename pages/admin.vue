@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const online = useOnline()
+const layout = 'admin'
 </script>
 
 <template>
   <div class="h-full w-full">
-    <NuxtLayout name="admin">
+    <NuxtLayout :name="layout">
       <NuxtPage />
     </NuxtLayout>
   </div>

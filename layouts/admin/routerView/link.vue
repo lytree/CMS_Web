@@ -18,7 +18,6 @@ import { reactive, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { verifyUrl } from '@/utils/toolsValidate'
 import { storeToRefs } from 'pinia'
-import pinia from '@/stores/index'
 import { useThemeConfig } from '@/stores/themeConfig'
 
 // 定义变量内容
@@ -30,7 +29,7 @@ const state = reactive<LinkViewState>({
 
 // 立即前往
 const onGotoFullPage = () => {
-  const stores = useThemeConfig(pinia)
+  const stores = useThemeConfig(usePinia())
   const { themeConfig } = storeToRefs(stores)
   const { origin, pathname } = window.location
   if (verifyUrl(<string>state.isLink)) window.open(state.isLink)
@@ -50,49 +49,33 @@ watch(
 </script>
 
 <style scoped >
-.layout-link-container {
-  .layout-link-warp {
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    i.layout-link-icon {
-      position: relative;
-      font-size: 100px;
-      color: var(--el-color-primary);
-      &::after {
-        content: '';
-        position: absolute;
-        left: 50px;
-        top: 0;
-        width: 15px;
-        height: 100px;
-        background: linear-gradient(
-          rgba(255, 255, 255, 0.01),
-          rgba(255, 255, 255, 0.01),
-          rgba(255, 255, 255, 0.01),
-          rgba(255, 255, 255, 0.05),
-          rgba(255, 255, 255, 0.05),
-          rgba(255, 255, 255, 0.05),
-          rgba(235, 255, 255, 0.5),
-          rgba(255, 255, 255, 0.05),
-          rgba(255, 255, 255, 0.05),
-          rgba(255, 255, 255, 0.05),
-          rgba(255, 255, 255, 0.01),
-          rgba(255, 255, 255, 0.01),
-          rgba(255, 255, 255, 0.01)
-        );
-        transform: rotate(-15deg);
-        animation: toRight 5s linear infinite;
-      }
-    }
-    .layout-link-msg {
-      font-size: 12px;
-      color: var(--next-bg-topBarColor);
-      opacity: 0.7;
-      margin-top: 15px;
-    }
-  }
+.layout-link-container .layout-link-warp {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.layout-link-container .layout-link-warp i.layout-link-icon {
+  position: relative;
+  font-size: 100px;
+  color: var(--el-color-primary);
+}
+.layout-link-container .layout-link-warp i.layout-link-icon::after {
+  content: "";
+  position: absolute;
+  left: 50px;
+  top: 0;
+  width: 15px;
+  height: 100px;
+  background: linear-gradient(rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05), rgba(235, 255, 255, 0.5), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.01));
+  transform: rotate(-15deg);
+  animation: toRight 5s linear infinite;
+}
+.layout-link-container .layout-link-warp .layout-link-msg {
+  font-size: 12px;
+  color: var(--next-bg-topBarColor);
+  opacity: 0.7;
+  margin-top: 15px;
 }
 </style>

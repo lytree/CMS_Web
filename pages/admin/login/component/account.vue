@@ -53,11 +53,11 @@
         </el-button>
       </el-form-item>
     </el-form>
-    <MyCaptchaDialog ref="myCaptchaDialogRef" v-model="state.showDialog" @ok="onOk" />
+    <l-captcha-dialog ref="myCaptchaDialogRef" v-model="state.showDialog" @ok="onOk" />
   </div>
 </template>
 
-<script setup lang="ts" name="loginAccount">
+<script setup lang="ts">
 import { reactive, computed, ref, defineAsyncComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
@@ -66,15 +66,14 @@ import { useI18n } from 'vue-i18n'
 // import { storeToRefs } from 'pinia'
 // import { useThemeConfig } from '@/stores/themeConfig'
 // import { initFrontEndControlRoutes } from '@/router/frontEnd'
-import { initBackEndControlRoutes } from '@/router/backEnd'
+// import { initBackEndControlRoutes } from '@/router/backEnd'
 import { Session } from '@/utils/storage'
 import { formatAxis } from '@/utils/formatTime'
 import { NextLoading } from '@/utils/loading'
-import { AuthApi } from '@/server/api/admin/Auth'
+// import { AuthApi } from '@/server/api/admin/Auth'
 import { AuthLoginInput } from '@/server/api/admin/data-contracts'
 import { useUserInfo } from '@/stores/userInfo'
 
-const MyCaptchaDialog = defineAsyncComponent(() => import('@/components/my-captcha/dialog.vue'))
 
 // 定义变量内容
 const { t } = useI18n()
@@ -119,9 +118,10 @@ const onOk = (data: any) => {
 //登录
 const login = async () => {
   state.loading.signIn = true
-  const res = await new AuthApi().login(state.ruleForm).catch(() => {
-    state.loading.signIn = false
-  })
+  // const res = await new AuthApi().login(state.ruleForm).catch(() => {
+  //   state.loading.signIn = false
+  // })
+  const res:any = {}
   if (!res?.success) {
     state.loading.signIn = false
     return
@@ -130,7 +130,7 @@ const login = async () => {
   const token = res.data?.token
   useUserInfo().setToken(token)
   // 添加完动态路由，再进行 router 跳转，否则可能报错 No match found for location with path "/"
-  const isNoPower = await initBackEndControlRoutes()
+  const isNoPower =true
   // 执行完 initBackEndControlRoutes，再执行 signInSuccess
   signInSuccess(isNoPower)
 }
@@ -142,13 +142,13 @@ const onSignIn = async () => {
 
     //检查是否开启验证码登录
     state.disabled.signIn = true
-    const res = await new AuthApi()
-      .isCaptcha()
-      .catch(() => { })
-      .finally(() => {
-        state.disabled.signIn = false
-      })
-
+    // const res = await new AuthApi()
+    //   .isCaptcha()
+    //   .catch(() => { })
+    //   .finally(() => {
+    //     state.disabled.signIn = false
+    //   })
+    const res:any = {}
     if (res?.success) {
       if (res.data) {
         state.showDialog = true
@@ -191,6 +191,7 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
 .login-content-form {
   margin-top: 20px;
 }
+
 .login-content-form .login-animation1 {
   opacity: 0;
   animation-name: error-num;
@@ -198,6 +199,7 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
   animation-fill-mode: forwards;
   animation-delay: calc(1/10)s;
 }
+
 .login-content-form .login-animation2 {
   opacity: 0;
   animation-name: error-num;
@@ -205,6 +207,7 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
   animation-fill-mode: forwards;
   animation-delay: calc(2/10)s;
 }
+
 .login-content-form .login-animation3 {
   opacity: 0;
   animation-name: error-num;
@@ -212,6 +215,7 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
   animation-fill-mode: forwards;
   animation-delay: calc(3/10)s;
 }
+
 .login-content-form .login-animation4 {
   opacity: 0;
   animation-name: error-num;
@@ -219,24 +223,27 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
   animation-fill-mode: forwards;
   animation-delay: calc(4/10)s;
 }
+
 .login-content-form .login-content-password {
   display: inline-block;
   width: 20px;
   cursor: pointer;
 }
+
 .login-content-form .login-content-password:hover {
   color: #909399;
 }
+
 .login-content-form .login-content-code {
   width: 100%;
   padding: 0;
   font-weight: bold;
   letter-spacing: 5px;
 }
+
 .login-content-form .login-content-submit {
   width: 100%;
   letter-spacing: 2px;
   font-weight: 300;
   margin-top: 15px;
-}
-</style>
+}</style>

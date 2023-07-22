@@ -1,11 +1,15 @@
-<script setup lang="ts" name="loginIndex">
+<script setup lang="ts">
 import { computed, defineAsyncComponent, onMounted, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useThemeConfig } from '/stores/themeConfig'
-import { NextLoading } from '/utils/loading'
+import { useThemeConfig } from '@/stores/themeConfig'
+import { NextLoading } from '@/utils/loading'
 import logoMini from '/assets/logo-mini.svg'
 import loginMain from '/assets/login-main.svg'
 import loginBg from '/assets/login-bg.svg'
+
+definePageMeta({
+  layout: false,
+})
 
 // 引入组件
 const Account = defineAsyncComponent(() => import('./component/account.vue'))
@@ -27,6 +31,7 @@ const getThemeConfig = computed(() => {
 // 页面加载时
 onMounted(() => {
   NextLoading.done()
+  console.log(useRouter().getRoutes())
 })
 </script>
 
@@ -47,7 +52,7 @@ onMounted(() => {
         <img :src="loginBg" class="login-left-waves">
       </div>
       <div class="login-right flex">
-        <div class="login-right-warp flex-margin">
+        <div class="flex-margin login-right-warp">
           <span class="login-right-warp-one" />
           <span class="login-right-warp-two" />
           <div class="login-right-warp-mian">

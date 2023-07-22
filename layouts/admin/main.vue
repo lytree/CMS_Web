@@ -60,10 +60,11 @@ defineExpose({
       wrap-class="layout-main-scroll"
       view-class="layout-main-scroll"
     >
-      <LayoutParentView />
+      <LayoutParentView>
+        <slot />
+      </LayoutParentView>
       <LayoutFooter v-if="isFooter" />
     </el-scrollbar>
-
     <el-backtop :target="setBacktopClass" :right="15" />
   </el-main>
 </template>

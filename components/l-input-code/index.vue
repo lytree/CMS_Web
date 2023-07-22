@@ -1,8 +1,8 @@
 <script lang="ts" setup name="my-input-code">
 import { computed, defineAsyncComponent, reactive, ref } from 'vue'
-import { isMobile } from '/@/utils/test'
 import { ElMessage } from 'element-plus'
-import { CaptchaApi } from '/@/server/api/admin/Captcha'
+import { isMobilePhone } from '@/utils/test'
+// import { CaptchaApi } from '@/server/api/admin/Captcha'
 
 const props = defineProps({
   maxlength: {
@@ -37,7 +37,7 @@ const props = defineProps({
 
 const emits = defineEmits(['send'])
 
-const MyCaptchaDialog = defineAsyncComponent(() => import('/@/components/my-captcha/dialog.vue'))
+// const LCaptchaDialog = defineAsyncComponent(() => import('@/components/l-captcha/dialog.vue'))
 
 const myCaptchaDialogRef = ref()
 const countdown = Date.now()
@@ -79,7 +79,7 @@ function onGetCode() {
 
 // 监听倒计时
 function onChange(value: number) {
-  if (state.countdown != countdown && value < 1000)
+  if (state.countdown !== countdown && value < 1000)
     state.status = 'finish'
 }
 
@@ -89,18 +89,18 @@ async function onOk(data: any) {
 
   // 发送短信验证码
   state.loading.getCode = true
-  const res = await new CaptchaApi()
-    .sendSmsCode({
-      mobile: props.mobile,
-      captchaId: data.captchaId,
-      track: data.track,
-      codeId: state.codeId,
-    })
-    .catch(() => {})
-    .finally(() => {
-      state.loading.getCode = false
-    })
-
+  // const res = await new CaptchaApi()
+  //   .sendSmsCode({
+  //     mobile: props.mobile,
+  //     captchaId: data.captchaId,
+  //     track: data.track,
+  //     codeId: state.codeId,
+  //   })
+  //   .catch(() => {})
+  //   .finally(() => {
+  //     state.loading.getCode = false
+  //   })
+  const res: any = {}
   if (res?.success && res.data) {
     state.codeId = res.data
     emits('send', res.data)
@@ -111,7 +111,7 @@ async function onOk(data: any) {
 // 获得验证码
 function getCode() {
   // 验证手机号
-  if (!isMobile(props.mobile)) {
+  if (!isMobilePhone(props.mobile)) {
     ElMessage.warning({ message: '请输入正确的手机号码', grouping: true })
     return
   }
@@ -150,17 +150,17 @@ function getCode() {
         />
       </template>
     </el-input>
-    <MyCaptchaDialog ref="myCaptchaDialogRef" v-model="state.showDialog" @ok="onOk" />
+    <l-captcha-dialog ref="myCaptchaDialogRef" v-model="state.showDialog" @ok="onOk" />
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 :deep(.el-statistic__content) {
   font-size: var(--el-font-size-base);
 }
 </style>
 
-<style lang="scss">
+<style>
 .my-captcha .el-dialog__body {
   padding-top: 10px;
 }

@@ -14,7 +14,7 @@
       </el-form-item>
       <el-form-item class="login-animation2" prop="code"
         :rules="[{ required: true, message: '请输入短信验证码', trigger: ['blur', 'change'] }]">
-        <MyInputCode v-model="state.ruleForm.code" @keyup.enter="onSignIn" :mobile="state.ruleForm.mobile"
+        <l-input-code v-model="state.ruleForm.code" @keyup.enter="onSignIn" :mobile="state.ruleForm.mobile"
           :validate="validate" @send="onSend" />
       </el-form-item>
       <el-form-item class="login-animation3">
@@ -33,16 +33,15 @@ import { reactive, defineAsyncComponent, ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { testMobile } from '@/utils/test'
-import { AuthApi } from '@/server/api/admin/Auth'
+// import { AuthApi } from '@/server/api/admin/Auth'
 import { AuthMobileLoginInput } from '@/server/api/admin/data-contracts'
 import { useUserInfo } from '@/stores/userInfo'
-import { initBackEndControlRoutes } from '@/router/backEnd'
+// import { initBackEndControlRoutes } from '@/router/backEnd'
 import { Session } from '@/utils/storage'
 import { NextLoading } from '@/utils/loading'
 import { useI18n } from 'vue-i18n'
 import { formatAxis } from '@/utils/formatTime'
 
-const MyInputCode = defineAsyncComponent(() => import('@/components/my-input-code/index.vue'))
 
 const { t } = useI18n()
 const route = useRoute()
@@ -89,9 +88,10 @@ const onSignIn = async () => {
     if (!valid) return
 
     state.loading.signIn = true
-    const res = await new AuthApi().mobileLogin(state.ruleForm).catch(() => {
-      state.loading.signIn = false
-    })
+    // const res = await new AuthApi().mobileLogin(state.ruleForm).catch(() => {
+    //   state.loading.signIn = false
+    // })
+    const res: any = {}
     if (!res?.success) {
       state.loading.signIn = false
       return
@@ -100,7 +100,7 @@ const onSignIn = async () => {
     const token = res.data?.token
     useUserInfo().setToken(token)
     // 添加完动态路由，再进行 router 跳转，否则可能报错 No match found for location with path "/"
-    const isNoPower = await initBackEndControlRoutes()
+    const isNoPower = true
     // 执行完 initBackEndControlRoutes，再执行 signInSuccess
     signInSuccess(isNoPower)
   })
