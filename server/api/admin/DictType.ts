@@ -88,7 +88,7 @@ export class DictType<SecurityDataType = unknown> extends HttpClient<SecurityDat
    * @secure
    */
   apiAdminDictTypeUpdatePut = (data: DictTypeUpdateInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/dict-type/update`,
       method: "PUT",
       body: data,
@@ -111,7 +111,7 @@ export class DictType<SecurityDataType = unknown> extends HttpClient<SecurityDat
     },
     params: RequestParams = {},
   ) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/dict-type/delete`,
       method: "DELETE",
       query: query,
@@ -127,7 +127,7 @@ export class DictType<SecurityDataType = unknown> extends HttpClient<SecurityDat
    * @secure
    */
   apiAdminDictTypeBatchDeletePut = (data: number[], params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/dict-type/batch-delete`,
       method: "PUT",
       body: data,
@@ -150,7 +150,7 @@ export class DictType<SecurityDataType = unknown> extends HttpClient<SecurityDat
     },
     params: RequestParams = {},
   ) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/dict-type/soft-delete`,
       method: "DELETE",
       query: query,
@@ -166,7 +166,7 @@ export class DictType<SecurityDataType = unknown> extends HttpClient<SecurityDat
    * @secure
    */
   apiAdminDictTypeBatchSoftDeletePut = (data: number[], params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/dict-type/batch-soft-delete`,
       method: "PUT",
       body: data,

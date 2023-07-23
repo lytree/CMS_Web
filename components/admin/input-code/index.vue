@@ -151,7 +151,7 @@ function getCode() {
         />
       </template>
     </el-input>
-    <l-captcha-dialog ref="myCaptchaDialogRef" v-model="state.showDialog" @ok="onOk" />
+    <a-captcha-dialog ref="myCaptchaDialogRef" v-model="state.showDialog" @ok="onOk" />
   </div>
 </template>
 

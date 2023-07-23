@@ -53,7 +53,7 @@
         </el-button>
       </el-form-item>
     </el-form>
-    <l-captcha-dialog ref="myCaptchaDialogRef" v-model="state.showDialog" @ok="onOk" />
+    <a-captcha-dialog ref="myCaptchaDialogRef" v-model="state.showDialog" @ok="onOk" />
   </div>
 </template>
 
@@ -70,7 +70,7 @@ import { useI18n } from 'vue-i18n'
 import { Session } from '@/utils/storage'
 import { formatAxis } from '@/utils/formatTime'
 import { NextLoading } from '@/utils/loading'
-// import { AuthApi } from '@/server/api/admin/Auth'
+import { AuthApi } from '@/server/api/admin/Auth'
 import { AuthLoginInput } from '@/server/api/admin/data-contracts'
 import { useUserInfo } from '@/stores/userInfo'
 
@@ -118,10 +118,9 @@ const onOk = (data: any) => {
 //登录
 const login = async () => {
   state.loading.signIn = true
-  // const res = await new AuthApi().login(state.ruleForm).catch(() => {
-  //   state.loading.signIn = false
-  // })
-  const res:any = {}
+  const res = await new AuthApi().apiAdminAuthLoginPost(state.ruleForm).catch(() => {
+    state.loading.signIn = false
+  })
   if (!res?.success) {
     state.loading.signIn = false
     return
@@ -142,13 +141,13 @@ const onSignIn = async () => {
 
     //检查是否开启验证码登录
     state.disabled.signIn = true
-    // const res = await new AuthApi()
-    //   .isCaptcha()
-    //   .catch(() => { })
-    //   .finally(() => {
-    //     state.disabled.signIn = false
-    //   })
-    const res:any = {}
+    const res = await new AuthApi()
+      .apiAdminAuthIsCaptchaGet()
+      .catch(() => { })
+      .finally(() => {
+        state.disabled.signIn = false
+      })
+    console.log(res)
     if (res?.success) {
       if (res.data) {
         state.showDialog = true

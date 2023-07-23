@@ -49,7 +49,7 @@ onMounted(() => {
             <img :src="loginBg" class="login-left-waves">
           </div>
           <div class="login-right flex">
-            <div class="flex-margin login-right-warp">
+            <div class="login-right-warp flex-margin">
               <span class="login-right-warp-one" />
               <span class="login-right-warp-two" />
               <div class="login-right-warp-mian">

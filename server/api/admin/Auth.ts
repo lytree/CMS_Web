@@ -22,7 +22,7 @@ import {
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
-export class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+export class AuthApi<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
   /**
    * No description
    *
@@ -32,7 +32,7 @@ export class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminAuthGetPasswordEncryptKeyGet = (params: RequestParams = {}) =>
-    this.request<ResultOutputAuthGetPasswordEncryptKeyOutput, any>({
+    this.request<ResultOutputAuthGetPasswordEncryptKeyOutput>({
       path: `/api/admin/auth/get-password-encrypt-key`,
       method: "GET",
       secure: true,
@@ -48,7 +48,7 @@ export class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminAuthGetUserProfileGet = (params: RequestParams = {}) =>
-    this.request<ResultOutputAuthUserProfileDto, any>({
+    this.request<ResultOutputAuthUserProfileDto>({
       path: `/api/admin/auth/get-user-profile`,
       method: "GET",
       secure: true,
@@ -64,7 +64,7 @@ export class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminAuthGetUserMenusGet = (params: RequestParams = {}) =>
-    this.request<ResultOutputListAuthUserMenuDto, any>({
+    this.request<ResultOutputListAuthUserMenuDto>({
       path: `/api/admin/auth/get-user-menus`,
       method: "GET",
       secure: true,
@@ -80,7 +80,7 @@ export class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminAuthGetUserPermissionsGet = (params: RequestParams = {}) =>
-    this.request<ResultOutputAuthGetUserPermissionsOutput, any>({
+    this.request<ResultOutputAuthGetUserPermissionsOutput>({
       path: `/api/admin/auth/get-user-permissions`,
       method: "GET",
       secure: true,
@@ -96,7 +96,7 @@ export class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminAuthGetUserInfoGet = (params: RequestParams = {}) =>
-    this.request<ResultOutputAuthGetUserInfoOutput, any>({
+    this.request<ResultOutputAuthGetUserInfoOutput>({
       path: `/api/admin/auth/get-user-info`,
       method: "GET",
       secure: true,
@@ -112,7 +112,7 @@ export class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminAuthLoginPost = (data: AuthLoginInput, params: RequestParams = {}) =>
-    this.request<ResultOutputObject, any>({
+    this.request<ResultOutputObject>({
       path: `/api/admin/auth/login`,
       method: "POST",
       body: data,
@@ -130,7 +130,7 @@ export class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminAuthMobileLoginPost = (data: AuthMobileLoginInput, params: RequestParams = {}) =>
-    this.request<ResultOutputObject, any>({
+    this.request<ResultOutputObject>({
       path: `/api/admin/auth/mobile-login`,
       method: "POST",
       body: data,
@@ -153,7 +153,7 @@ export class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
     },
     params: RequestParams = {},
   ) =>
-    this.request<ResultOutputObject, any>({
+    this.request<ResultOutputObject>({
       path: `/api/admin/auth/refresh`,
       method: "GET",
       query: query,
@@ -170,7 +170,7 @@ export class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminAuthIsCaptchaGet = (params: RequestParams = {}) =>
-    this.request<ResultOutputBoolean, any>({
+    this.request<ResultOutputBoolean>({
       path: `/api/admin/auth/is-captcha`,
       method: "GET",
       secure: true,

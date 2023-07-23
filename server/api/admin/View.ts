@@ -92,7 +92,7 @@ export class View<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminViewUpdatePut = (data: ViewUpdateInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/view/update`,
       method: "PUT",
       body: data,
@@ -115,7 +115,7 @@ export class View<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
     },
     params: RequestParams = {},
   ) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/view/delete`,
       method: "DELETE",
       query: query,
@@ -131,7 +131,7 @@ export class View<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminViewBatchDeletePut = (data: number[], params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/view/batch-delete`,
       method: "PUT",
       body: data,
@@ -154,7 +154,7 @@ export class View<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
     },
     params: RequestParams = {},
   ) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/view/soft-delete`,
       method: "DELETE",
       query: query,
@@ -170,7 +170,7 @@ export class View<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminViewBatchSoftDeletePut = (data: number[], params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/view/batch-soft-delete`,
       method: "PUT",
       body: data,
@@ -187,7 +187,7 @@ export class View<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminViewSyncPost = (data: ViewSyncInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/view/sync`,
       method: "POST",
       body: data,

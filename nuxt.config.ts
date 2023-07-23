@@ -67,8 +67,8 @@ export default defineNuxtConfig({
       ignore: ['/hi'],
     },
     devProxy: {
-      '/gitee': {
-        target: 'https://gitee.com', // 这里是接口地址
+      '/api': {
+        target: 'http://127.0.0.1:8000/api', // 这里是接口地址
         changeOrigin: true,
         prependPath: true,
       },

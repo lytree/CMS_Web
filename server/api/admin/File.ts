@@ -46,7 +46,7 @@ export class File<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminFileDeletePost = (data: FileDeleteInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/file/delete`,
       method: "POST",
       body: data,

@@ -272,7 +272,7 @@ export class Permission<SecurityDataType = unknown> extends HttpClient<SecurityD
    * @secure
    */
   apiAdminPermissionUpdateGroupPut = (data: PermissionUpdateGroupInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/permission/update-group`,
       method: "PUT",
       body: data,
@@ -289,7 +289,7 @@ export class Permission<SecurityDataType = unknown> extends HttpClient<SecurityD
    * @secure
    */
   apiAdminPermissionUpdateMenuPut = (data: PermissionUpdateMenuInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/permission/update-menu`,
       method: "PUT",
       body: data,
@@ -306,7 +306,7 @@ export class Permission<SecurityDataType = unknown> extends HttpClient<SecurityD
    * @secure
    */
   apiAdminPermissionUpdateApiPut = (data: PermissionUpdateApiInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/permission/update-api`,
       method: "PUT",
       body: data,
@@ -323,7 +323,7 @@ export class Permission<SecurityDataType = unknown> extends HttpClient<SecurityD
    * @secure
    */
   apiAdminPermissionUpdateDotPut = (data: PermissionUpdateDotInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/permission/update-dot`,
       method: "PUT",
       body: data,
@@ -346,7 +346,7 @@ export class Permission<SecurityDataType = unknown> extends HttpClient<SecurityD
     },
     params: RequestParams = {},
   ) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/permission/delete`,
       method: "DELETE",
       query: query,
@@ -368,7 +368,7 @@ export class Permission<SecurityDataType = unknown> extends HttpClient<SecurityD
     },
     params: RequestParams = {},
   ) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/permission/soft-delete`,
       method: "DELETE",
       query: query,
@@ -384,7 +384,7 @@ export class Permission<SecurityDataType = unknown> extends HttpClient<SecurityD
    * @secure
    */
   apiAdminPermissionAssignPost = (data: PermissionAssignInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/permission/assign`,
       method: "POST",
       body: data,

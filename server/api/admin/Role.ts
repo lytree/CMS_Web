@@ -119,7 +119,7 @@ export class Role<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminRoleAddRoleUserPost = (data: RoleAddRoleUserListInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/role/add-role-user`,
       method: "POST",
       body: data,
@@ -136,7 +136,7 @@ export class Role<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminRoleRemoveRoleUserPost = (data: RoleAddRoleUserListInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/role/remove-role-user`,
       method: "POST",
       body: data,
@@ -171,7 +171,7 @@ export class Role<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminRoleUpdatePut = (data: RoleUpdateInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/role/update`,
       method: "PUT",
       body: data,
@@ -194,7 +194,7 @@ export class Role<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
     },
     params: RequestParams = {},
   ) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/role/delete`,
       method: "DELETE",
       query: query,
@@ -210,7 +210,7 @@ export class Role<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminRoleBatchDeletePut = (data: number[], params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/role/batch-delete`,
       method: "PUT",
       body: data,
@@ -233,7 +233,7 @@ export class Role<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
     },
     params: RequestParams = {},
   ) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/role/soft-delete`,
       method: "DELETE",
       query: query,
@@ -249,7 +249,7 @@ export class Role<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminRoleBatchSoftDeletePut = (data: number[], params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/role/batch-soft-delete`,
       method: "PUT",
       body: data,

@@ -16,7 +16,7 @@ const state = reactive({
 // 生成滑块验证码
 async function onGenerate() {
   slideCaptchaRef.value.startRequestGenerate()
-  const res = await new CaptchaApi().generate({ captchaId: state.requestId }).catch(() => {
+  const res = await new CaptchaApi().apiAdminCaptchaGeneratePost({ captchaId: state.requestId }).catch(() => {
     slideCaptchaRef.value.endRequestGenerate(null, null)
   })
   if (res?.success && res.data) {
@@ -28,7 +28,7 @@ async function onGenerate() {
 // 验证滑块验证码
 async function onFinish(data: any) {
   slideCaptchaRef.value.startRequestVerify()
-  const res = await new CaptchaApi().check(data, { captchaId: state.requestId }).catch(() => {
+  const res = await new CaptchaApi().apiAdminCaptchaCheckPost(data, { captchaId: state.requestId }).catch(() => {
     state.failTip = '服务异常，请稍后重试'
     slideCaptchaRef.value.endRequestVerify(false)
   })
@@ -72,4 +72,4 @@ defineExpose({
   />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped></style>

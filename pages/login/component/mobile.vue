@@ -14,7 +14,7 @@
       </el-form-item>
       <el-form-item class="login-animation2" prop="code"
         :rules="[{ required: true, message: '请输入短信验证码', trigger: ['blur', 'change'] }]">
-        <l-input-code v-model="state.ruleForm.code" @keyup.enter="onSignIn" :mobile="state.ruleForm.mobile"
+        <a-input-code v-model="state.ruleForm.code" @keyup.enter="onSignIn" :mobile="state.ruleForm.mobile"
           :validate="validate" @send="onSend" />
       </el-form-item>
       <el-form-item class="login-animation3">

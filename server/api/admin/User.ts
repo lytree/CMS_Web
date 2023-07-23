@@ -130,7 +130,7 @@ export class User<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminUserUpdatePut = (data: UserUpdateInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/user/update`,
       method: "PUT",
       body: data,
@@ -165,7 +165,7 @@ export class User<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminUserUpdateMemberPut = (data: UserUpdateMemberInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/user/update-member`,
       method: "PUT",
       body: data,
@@ -182,7 +182,7 @@ export class User<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminUserUpdateBasicPut = (data: UserUpdateBasicInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/user/update-basic`,
       method: "PUT",
       body: data,
@@ -199,7 +199,7 @@ export class User<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminUserChangePasswordPut = (data: UserChangePasswordInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/user/change-password`,
       method: "PUT",
       body: data,
@@ -234,7 +234,7 @@ export class User<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminUserSetEnablePost = (data: UserSetEnableInput, params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/user/set-enable`,
       method: "POST",
       body: data,
@@ -257,7 +257,7 @@ export class User<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
     },
     params: RequestParams = {},
   ) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/user/delete`,
       method: "DELETE",
       query: query,
@@ -273,7 +273,7 @@ export class User<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminUserBatchDeletePut = (data: number[], params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/user/batch-delete`,
       method: "PUT",
       body: data,
@@ -296,7 +296,7 @@ export class User<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
     },
     params: RequestParams = {},
   ) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/user/soft-delete`,
       method: "DELETE",
       query: query,
@@ -312,7 +312,7 @@ export class User<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
    * @secure
    */
   apiAdminUserBatchSoftDeletePut = (data: number[], params: RequestParams = {}) =>
-    this.request<AxiosResponse, any>({
+    this.request<FetchResponse, any>({
       path: `/api/admin/user/batch-soft-delete`,
       method: "PUT",
       body: data,
