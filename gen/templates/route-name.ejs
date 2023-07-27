@@ -26,18 +26,12 @@ const createCustomOperationId = (method, route, moduleName) => {
   const hasPathInserts = /\{(\w){1,}\}/g.test(route);
   const splitedRouteBySlash = _.compact(_.replace(route, /\{(\w){1,}\}/g, "").split("/"));
   const routeParts = (splitedRouteBySlash.length > 1
-    ? splitedRouteBySlash.splice(1)
+    ? [splitedRouteBySlash[splitedRouteBySlash.length-1]]
     : splitedRouteBySlash
   ).join("_");
-  return routeParts.length > 3 && methodAliases[method]
-    ? methodAliases[method](routeParts, hasPathInserts)
-    : _.camelCase(_.lowerCase(method) + "_" + [moduleName].join("_")) || "index";
+  return _.camelCase(_.lowerCase(moduleName)+'_'+_.lowerCase(routeParts)+'_'+_.lowerCase(method));
 };
 
-if (operationId)
-  return _.camelCase(operationId);
-if (route === "/")
-  return _.camelCase(`${_.lowerCase(method)}Root`);
 
 return createCustomOperationId(method, route, moduleName);
 %>

@@ -1,6 +1,7 @@
-import { appDescription } from './constants/index'
+import { appDescription } from './src/constants/index'
 
 export default defineNuxtConfig({
+  srcDir: 'src/',
   //  #region 组件名自定义
   components: [
     { path: '~/components/common', prefix: 'c' },
@@ -24,7 +25,7 @@ export default defineNuxtConfig({
     ],
   },
   i18n: {
-    vueI18n: './i18n/index.ts', // if you are using custom path, default
+    vueI18n: './src/i18n/index.ts', // if you are using custom path, default
   },
   routeRules: {
     '/admin/**': { ssr: false, cors: true },
@@ -68,7 +69,7 @@ export default defineNuxtConfig({
     },
     devProxy: {
       '/api': {
-        target: 'http://127.0.0.1:8000/api', // 这里是接口地址
+        target: 'http://10.100.50.80:8000/api', // 这里是接口地址
         changeOrigin: true,
         prependPath: true,
       },

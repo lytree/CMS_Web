@@ -13,7 +13,7 @@ const { generateApi } = pkg
 const apis = [
   {
     output: resolve(__dirname, '../server/api/admin'),
-    url: 'http://localhost:8000/admin/swagger/admin/swagger.json',
+    url: 'http://10.100.50.80:8000/admin/swagger/admin/swagger.json',
   },
 ]
 
@@ -30,7 +30,7 @@ apis?.forEach((api, index) => {
       moduleNameFirstTag: true, // apis htt-client data-contracts
       unwrapResponseData: true,
       generateUnionEnums: true,
-      defaultResponseType: 'FetchResponse',
+      defaultResponseType: 'any',
       // hooks: {
       //   onFormatTypeName: (typeName, rawTypeName, schemaType) => {
 

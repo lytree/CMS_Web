@@ -1,10 +1,18 @@
-<%
-const { apiConfig, generateResponses, config } = it;
-%>
-import { storeToRefs } from 'pinia'
-import { useUserInfo } from '@/stores/userInfo'
+/* eslint-disable */
+/* tslint:disable */
+/*
+ * ---------------------------------------------------------------
+ * ## THIS FILE WAS GENERATED VIA SWAGGER-TYPESCRIPT-API        ##
+ * ##                                                           ##
+ * ## AUTHOR: acacode                                           ##
+ * ## SOURCE: https://github.com/acacode/swagger-typescript-api ##
+ * ---------------------------------------------------------------
+ */
+
+import { useUserInfo } from "@/stores/userInfo";
 import { LoadingOptions } from "element-plus";
-import { ofetch, $Fetch, FetchRequest, FetchOptions } from "ofetch";
+import { $Fetch, FetchOptions, FetchRequest, ofetch } from "ofetch";
+import { storeToRefs } from "pinia";
 
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed" | "stream">;
@@ -40,13 +48,14 @@ export interface FullRequestParams extends Omit<RequestInit, "body"> {
 
 export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
 
-export interface ApiConfig<SecurityDataType = unknown> extends Omit<FetchOptions, 'data' | 'cancelToken'> {
+export interface ApiConfig<SecurityDataType = unknown> extends Omit<FetchOptions, "data" | "cancelToken"> {
   // baseApiParams?: Omit<RequestParams, "baseUrl" | "cancelToken" | "signal">;
-  securityWorker?: (securityData: SecurityDataType | null) => Promise<RequestParams | FetchRequest | void> | FetchRequest | RequestParams | void;
+  securityWorker?: (
+    securityData: SecurityDataType | null,
+  ) => Promise<RequestParams | FetchRequest | void> | FetchRequest | RequestParams | void;
   secure?: boolean;
   format?: ResponseType;
 }
-
 
 type CancelToken = Symbol | string | number;
 
@@ -77,17 +86,18 @@ export class HttpClient<SecurityDataType = unknown> {
     headers: {},
     redirect: "follow",
     referrerPolicy: "no-referrer",
-    format: 'json'
+    format: "json",
   };
 
   constructor({ securityWorker, secure, format, ...fetchConfig }: ApiConfig<SecurityDataType> = {}) {
     this.apiFetch = ofetch.create({
-      baseURL: import.meta.env.VITE_API_URL, ...fetchConfig,
+      baseURL: import.meta.env.VITE_API_URL,
+      ...fetchConfig,
       ...this.baseApiParams,
-    })
-    this.secure = secure
-    this.format = format
-    this.securityWorker = securityWorker
+    });
+    this.secure = secure;
+    this.format = format;
+    this.securityWorker = securityWorker;
   }
 
   public setSecurityData = (data: SecurityDataType | null) => {
@@ -133,8 +143,8 @@ export class HttpClient<SecurityDataType = unknown> {
           property instanceof Blob
             ? property
             : typeof property === "object" && property !== null
-              ? JSON.stringify(property)
-              : `${property}`,
+            ? JSON.stringify(property)
+            : `${property}`,
         );
         return formData;
       }, new FormData()),
@@ -177,64 +187,64 @@ export class HttpClient<SecurityDataType = unknown> {
     }
   };
   /**
-* 错误处理
-* @param {*} error
-*/
+   * 错误处理
+   * @param {*} error
+   */
   protected errorHandle(error: any) {
     if (!error) {
-      return
+      return;
     }
     // if (this.apiFetch.isCancel(error)) return console.error('请求重复已被自动取消：' + error.message)
-    let message = ''
+    let message = "";
     switch (error.status) {
       case 302:
-        message = '接口重定向'
-        break
+        message = "接口重定向";
+        break;
       case 400:
-        message = '参数不正确'
-        break
+        message = "参数不正确";
+        break;
       case 401:
-        message = '您还没有登录'
-        break
+        message = "您还没有登录";
+        break;
       case 403:
-        message = '您没有权限操作'
-        break
+        message = "您没有权限操作";
+        break;
       case 404:
-        message = '请求地址出错：' + error.response.config.url
-        break
+        message = "请求地址出错：" + error.response.config.url;
+        break;
       case 408:
-        message = '请求超时'
-        break
+        message = "请求超时";
+        break;
       case 409:
-        message = '系统已存在相同数据'
-        break
+        message = "系统已存在相同数据";
+        break;
       case 500:
-        message = '服务器内部错误'
-        break
+        message = "服务器内部错误";
+        break;
       case 501:
-        message = '服务未实现'
-        break
+        message = "服务未实现";
+        break;
       case 502:
-        message = '网关错误'
-        break
+        message = "网关错误";
+        break;
       case 503:
-        message = '服务不可用'
-        break
+        message = "服务不可用";
+        break;
       case 504:
-        message = '服务暂时无法访问，请稍后再试'
-        break
+        message = "服务暂时无法访问，请稍后再试";
+        break;
       case 505:
-        message = 'HTTP版本不受支持'
-        break
+        message = "HTTP版本不受支持";
+        break;
       default:
-        message = '异常问题，请联系网站管理员'
-        break
+        message = "异常问题，请联系网站管理员";
+        break;
     }
-    if (error.message.includes('timeout')) message = '请求超时'
-    if (error.message.includes('Network')) message = window.navigator.onLine ? '服务端异常' : '您已断网'
+    if (error.message.includes("timeout")) message = "请求超时";
+    if (error.message.includes("Network")) message = window.navigator.onLine ? "服务端异常" : "您已断网";
 
     if (message) {
-      ElMessage.error({ message, grouping: true })
+      ElMessage.error({ message, grouping: true });
     }
   }
   /**
@@ -242,30 +252,30 @@ export class HttpClient<SecurityDataType = unknown> {
    * @param {*} config
    */
   protected async refreshToken(config: any) {
-    const storesUseUserInfo = useUserInfo()
-    const { userInfos } = storeToRefs(storesUseUserInfo)
-    const token = userInfos.value.token
+    const storesUseUserInfo = useUserInfo();
+    const { userInfos } = storeToRefs(storesUseUserInfo);
+    const token = userInfos.value.token;
     if (!token) {
-      storesUseUserInfo.clear()
-      return Promise.reject(config)
+      storesUseUserInfo.clear();
+      return Promise.reject(config);
     }
 
     if (window.tokenRefreshing) {
-      window.requests = window.requests ? window.requests : []
+      window.requests = window.requests ? window.requests : [];
       return new Promise((resolve) => {
         window.requests.push(() => {
-          resolve(this.apiFetch(config))
-        })
-      })
+          resolve(this.apiFetch(config));
+        });
+      });
     }
 
-    window.tokenRefreshing = true
+    window.tokenRefreshing = true;
 
     return this.request<any>({
       path: `/api/admin/auth/refresh`,
-      method: 'GET',
+      method: "GET",
       secure: true,
-      format: 'json',
+      format: "json",
       login: false,
       query: {
         token: token,
@@ -273,42 +283,40 @@ export class HttpClient<SecurityDataType = unknown> {
     })
       .then((res) => {
         if (res?.success) {
-          const token = res.data.token
-          storesUseUserInfo.setToken(token)
+          const token = res.data.token;
+          storesUseUserInfo.setToken(token);
           if (window.requests?.length > 0) {
-            window.requests.forEach((apiRequest) => apiRequest())
-            window.requests = []
+            window.requests.forEach((apiRequest) => apiRequest());
+            window.requests = [];
           }
-          return this.apiFetch(config)
+          return this.apiFetch(config);
         } else {
-          storesUseUserInfo.clear()
-          return Promise.reject(res)
+          storesUseUserInfo.clear();
+          return Promise.reject(res);
         }
       })
       .catch((error) => {
-        storesUseUserInfo.clear()
-        return Promise.reject(error)
+        storesUseUserInfo.clear();
+        return Promise.reject(error);
       })
       .finally(() => {
-        window.tokenRefreshing = false
-      })
+        window.tokenRefreshing = false;
+      });
   }
 
   /**
    * 关闭Loading层实例
    */
   protected closeLoading(loading: boolean = false) {
-
-    if (loading && loadingInstance.count > 0) loadingInstance.count--
+    if (loading && loadingInstance.count > 0) loadingInstance.count--;
 
     if (loadingInstance.count === 0) {
-      loadingInstance.target.close()
-      loadingInstance.target = null
-      console.log(false)
+      loadingInstance.target.close();
+      loadingInstance.target = null;
+      console.log(false);
     }
-
   }
-  public request = async <T = any>({
+  public request = async <T = any,>({
     body,
     secure,
     path,
@@ -324,7 +332,11 @@ export class HttpClient<SecurityDataType = unknown> {
     cancelToken,
     ...params
   }: FullRequestParams): Promise<T> => {
-    const secureParams = ((typeof secure === "boolean" ? secure : this.secure) && this.securityWorker && (await this.securityWorker(this.securityData))) || {};
+    const secureParams =
+      ((typeof secure === "boolean" ? secure : this.secure) &&
+        this.securityWorker &&
+        (await this.securityWorker(this.securityData))) ||
+      {};
     const requestParams = this.mergeRequestParams(params, secureParams);
     // const queryString = query && this.toQueryString(query);
     const payloadFormatter = this.contentFormatters[type || ContentType.Json];
@@ -341,51 +353,48 @@ export class HttpClient<SecurityDataType = unknown> {
       body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
       responseType: responseFormat,
       onRequest: ({ request, options }) => {
-
         if (loading) {
-          loadingInstance.count++
+          loadingInstance.count++;
           if (loadingInstance.count === 1) {
-            loadingInstance.target = ElLoading.service(loadingOptions)
+            loadingInstance.target = ElLoading.service(loadingOptions);
           }
         }
 
-        const { userInfos } = storeToRefs(useUserInfo())
+        const { userInfos } = storeToRefs(useUserInfo());
         const accessToken = userInfos.value.token;
-        (options.headers! as any)['Authorization'] = `Bearer ${accessToken}`;
-        console.log(request, options)
+        (options.headers! as any)["Authorization"] = `Bearer ${accessToken}`;
       },
       onRequestError({ request, options, error }) {
-        console.log('[fetch request error options]', request, error, options)
+        console.log("[fetch request error options]", request, error, options);
       },
       onResponse: ({ request, response, options }) => {
-        loading && this.closeLoading(loading)
-        const data = response._data
+        loading && this.closeLoading(loading);
+        const data = response._data;
         if (data.success) {
           if (showSuccessMessage) {
-            ElMessage.success({ message: data.msg ? data.msg : '操作成功', grouping: true })
+            ElMessage.success({ message: data.msg ? data.msg : "操作成功", grouping: true });
           }
         } else {
           if (showErrorMessage) {
-            ElMessage.error({ message: data.msg ? data.msg : '操作失败', grouping: true })
+            ElMessage.error({ message: data.msg ? data.msg : "操作失败", grouping: true });
           }
         }
-
       },
       onResponseError: ({ request, response, options }) => {
-        loading && this.closeLoading(loading)
+        loading && this.closeLoading(loading);
 
         //刷新token
         if (login && response.status === 401) {
-          return this.refreshToken(options)
+          return this.refreshToken(options);
         }
 
         //错误处理
         if (showErrorMessage) {
-          this.errorHandle(response)
+          this.errorHandle(response);
         }
         // Log error
-        console.log('[fetch response error]', request, response)
-      }
-    }).then((response) =>response)
+        console.log("[fetch response error]", request, response);
+      },
+    }).then((response) => response);
   };
 }
