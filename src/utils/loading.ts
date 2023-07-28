@@ -1,6 +1,5 @@
-/* eslint-disable no-tabs */
 import { nextTick } from 'vue'
-import '@/assets/theme/loading.css'
+import '/@/theme/loading.scss'
 
 /**
  * 页面全局 Loading
@@ -33,7 +32,7 @@ export const NextLoading = {
     window.nextLoading = true
   },
   // 移除 loading
-  done: (time = 0) => {
+  done: (time: number = 0) => {
     nextTick(() => {
       setTimeout(() => {
         window.nextLoading = false

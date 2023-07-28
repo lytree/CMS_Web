@@ -1,24 +1,28 @@
-import { defineAsyncComponent, nextTick } from 'vue'
+import { nextTick, defineAsyncComponent } from 'vue'
+import type { App } from 'vue'
 import * as svg from '@element-plus/icons-vue'
+import router from '/@/router/index'
+import pinia from '/@/stores/index'
 import { storeToRefs } from 'pinia'
-import type { NuxtApp } from 'nuxt/app'
-import { useThemeConfig } from '@/stores/themeConfig'
-import { Local } from '@/utils/storage'
-import { verifyUrl } from '@/utils/toolsValidate'
+import { useThemeConfig } from '/@/stores/themeConfig'
+import { i18n } from '/@/i18n/index'
+import { Local } from '/@/utils/storage'
+import { verifyUrl } from '/@/utils/toolsValidate'
+
 // 引入组件
-const SvgIcon = defineAsyncComponent(() => import('@/components/common/svgIcon/index.vue'))
+const SvgIcon = defineAsyncComponent(() => import('/@/components/svgIcon/index.vue'))
 
 /**
  * 导出全局注册 element plus svg 图标
  * @param app vue 实例
  * @description 使用：https://element-plus.gitee.io/zh-CN/component/icon.html
  */
-export function elSvg(app: NuxtApp) {
+export function elSvg(app: App) {
   const icons = svg as any
-  for (const i in icons)
-    app.vueApp.component(`ele-${icons[i].name}`, icons[i])
-
-  app.vueApp.component('SvgIcon', SvgIcon)
+  for (const i in icons) {
+    app.component(`ele-${icons[i].name}`, icons[i])
+  }
+  app.component('SvgIcon', SvgIcon)
 }
 
 /**
@@ -26,18 +30,17 @@ export function elSvg(app: NuxtApp) {
  * @method const title = useTitle(); ==> title()
  */
 export function useTitle() {
-  const stores = useThemeConfig(usePinia())
+  const stores = useThemeConfig(pinia)
   const { themeConfig } = storeToRefs(stores)
   nextTick(() => {
     let webTitle = ''
-    const globalTitle: string = themeConfig.value.globalTitle
-    const { path, meta } = useRouter().currentRoute.value
-    if (path === '/login')
+    let globalTitle: string = themeConfig.value.globalTitle
+    const { path, meta } = router.currentRoute.value
+    if (path === '/login') {
       webTitle = <string>meta.title
-
-    else
-      webTitle = setTagsViewNameI18n(useRouter().currentRoute.value)
-
+    } else {
+      webTitle = setTagsViewNameI18n(router.currentRoute.value)
+    }
     document.title = `${webTitle} - ${globalTitle}` || globalTitle
   })
 }
@@ -48,7 +51,7 @@ export function useTitle() {
  * @returns 返回当前 tagsViewName 名称
  */
 export function setTagsViewNameI18n(item: any) {
-  let tagsViewName = ''
+  let tagsViewName: string = ''
   const { query, params, meta } = item
   // 修复tagsViewName匹配到其他含下列单词的路由
   const pattern = /^\{("(zh-cn|en|zh-tw)":"[^,]+",?){1,3}}$/
@@ -56,17 +59,14 @@ export function setTagsViewNameI18n(item: any) {
     if (pattern.test(query?.tagsViewName) || pattern.test(params?.tagsViewName)) {
       // 国际化
       const urlTagsParams = (query?.tagsViewName && JSON.parse(query?.tagsViewName)) || (params?.tagsViewName && JSON.parse(params?.tagsViewName))
-      tagsViewName = urlTagsParams[useI18n().locale.value]
-    }
-    else {
+      tagsViewName = urlTagsParams[i18n.global.locale.value]
+    } else {
       // 非国际化
       tagsViewName = query?.tagsViewName || params?.tagsViewName
     }
-  }
-  else {
+  } else {
     // 非自定义 tagsView 名称
-    if (meta.title)
-      tagsViewName = useI18n().t(meta.title)
+    if (meta.title) tagsViewName = i18n.global.t(meta.title)
   }
   return tagsViewName
 }
@@ -77,7 +77,7 @@ export function setTagsViewNameI18n(item: any) {
  * @param arr 列表数据
  * @description data-xxx 属性用于存储页面或应用程序的私有自定义数据
  */
-export function lazyImg(el: string, arr: EmptyArrayType) {
+export const lazyImg = (el: string, arr: EmptyArrayType) => {
   const io = new IntersectionObserver((res) => {
     res.forEach((v: any) => {
       if (v.isIntersecting) {
@@ -85,13 +85,13 @@ export function lazyImg(el: string, arr: EmptyArrayType) {
         v.target.src = img
         v.target.onload = () => {
           io.unobserve(v.target)
-          arr[key].loading = false
+          arr[key]['loading'] = false
         }
       }
     })
   })
   nextTick(() => {
-    document.querySelectorAll(el).forEach(img => io.observe(img))
+    document.querySelectorAll(el).forEach((img) => io.observe(img))
   })
 }
 
@@ -99,8 +99,8 @@ export function lazyImg(el: string, arr: EmptyArrayType) {
  * 全局组件大小
  * @returns 返回 `window.localStorage` 中读取的缓存值 `globalComponentSize`
  */
-export function globalComponentSize(): string {
-  const stores = useThemeConfig(usePinia())
+export const globalComponentSize = (): string => {
+  const stores = useThemeConfig(pinia)
   const { themeConfig } = storeToRefs(stores)
   return Local.get('themeConfig')?.globalComponentSize || themeConfig.value?.globalComponentSize
 }
@@ -114,16 +114,15 @@ export function deepClone(obj: EmptyObjectType) {
   let newObj: EmptyObjectType
   try {
     newObj = obj.push ? [] : {}
-  }
-  catch (error) {
+  } catch (error) {
     newObj = {}
   }
-  for (const attr in obj) {
-    if (obj[attr] && typeof obj[attr] === 'object')
+  for (let attr in obj) {
+    if (obj[attr] && typeof obj[attr] === 'object') {
       newObj[attr] = deepClone(obj[attr])
-
-    else
+    } else {
       newObj[attr] = obj[attr]
+    }
   }
   return newObj
 }
@@ -134,13 +133,13 @@ export function deepClone(obj: EmptyObjectType) {
 export function isMobile() {
   if (
     navigator.userAgent.match(
-      /('phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone')/i,
+      /('phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone')/i
     )
-  )
+  ) {
     return true
-
-  else
+  } else {
     return false
+  }
 }
 
 /**
@@ -153,12 +152,13 @@ export function handleEmpty(list: EmptyArrayType) {
   const arr = []
   for (const i in list) {
     const d = []
-    for (const j in list[i])
+    for (const j in list[i]) {
       d.push(list[i][j])
-
-    const leng = d.filter(item => item === '').length
-    if (leng !== d.length)
+    }
+    const leng = d.filter((item) => item === '').length
+    if (leng !== d.length) {
       arr.push(list[i])
+    }
   }
   return arr
 }
@@ -168,13 +168,12 @@ export function handleEmpty(list: EmptyArrayType) {
  * @param val 当前点击项菜单
  */
 export function handleOpenLink(val: RouteItem) {
-  const stores = useThemeConfig(usePinia())
+  const stores = useThemeConfig(pinia)
   const { themeConfig } = storeToRefs(stores)
 
   const { origin, pathname } = window.location
-  useRouter().push(val.path)
-  if (verifyUrl(<string>val.meta?.isLink))
-    window.open(val.meta?.isLink)
+  router.push(val.path)
+  if (verifyUrl(<string>val.meta?.isLink)) window.open(val.meta?.isLink)
   else themeConfig.value.isCreateWebHistory ? window.open(`${origin}${val.meta?.isLink}`) : window.open(`${origin}${pathname}#${val.meta?.isLink}`)
 }
 
@@ -191,7 +190,7 @@ export function handleOpenLink(val: RouteItem) {
  * @method handleOpenLink 打开外部链接
  */
 const other = {
-  elSvg: (app: NuxtApp) => {
+  elSvg: (app: App) => {
     elSvg(app)
   },
   useTitle: () => {

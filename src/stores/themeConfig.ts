@@ -12,7 +12,7 @@ export const useThemeConfig = defineStore('themeConfig', {
       // 是否开启布局配置抽屉
       isDrawer: false,
       // 是否创建一个h5历史，否则创建一个 hash 历史记录
-      isCreateWebHistory: true,
+      isCreateWebHistory: false,
 
       /**
        * 全局主题
@@ -20,7 +20,6 @@ export const useThemeConfig = defineStore('themeConfig', {
       // 默认 primary 主题颜色 蓝色 #409eff 红色 #F34D37 紫色 #6954f0 绿色 #41b584
       primary: '#6954f0',
       // 是否开启深色模式
-      colorMode: 'system',
       isIsDark: false,
 
       /**

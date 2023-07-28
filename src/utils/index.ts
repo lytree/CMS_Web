@@ -8,15 +8,15 @@ interface JwtPayload {
  */
 export function parseJwtToken(token: string): JwtPayload | null {
   const base64Url = token?.split('.')[1]
-  if (!base64Url)
+  if (!base64Url) {
     return null
+  }
 
   const base64 = base64Url.replace('-', '+').replace('_', '/')
   try {
     const payload = JSON.parse(window.atob(base64))
     return payload
-  }
-  catch {
+  } catch {
     return null
   }
 }
@@ -25,7 +25,7 @@ export function parseJwtToken(token: string): JwtPayload | null {
  * 获得文件后缀名
  * @param {String} filename 文件名
  */
-export function getFileExtension(filename: string): string {
+export const getFileExtension = (filename: string): string => {
   const index = filename.lastIndexOf('.')
   return index >= 0 ? filename.substring(index) : ''
 }
