@@ -1,6 +1,6 @@
 <div align="center">
 	<h2>中台admin</h2>
-	<h3>前后端分离后台权限管理系统</h3>
+	<h3>前后端分离后台权限管理系统-前端</h3>
 	<p align="center">
 	    <a href="https://v3.vuejs.org/" target="_blank">
 	        <img src="https://img.shields.io/badge/vue.js-vue3.x-green" alt="vue">
@@ -19,21 +19,7 @@
 </div>
 
 #### 🌈 介绍
-
-基于 vue3.x + CompositionAPI setup 语法糖 + typescript + vite + element plus + vue-router-next + pinia 技术，内置支持一键生成微服务接口，适配手机、平板、pc 的后台权限管理框架，希望减少工作量，帮助大家实现快速开发。
-
-#### ⛱️ 线上预览
-
-- vue3.x 版本预览（admin.ui.plus）<a href="https://admin.zhontai.net/login" target="_blank">https://admin.zhontai.net</a>
-
-#### 💒 代码仓库
-
-- vue3.x 版本 <a href="https://github.com/zhontai/admin.ui.plus" target="_blank">https://github.com/zhontai/admin.ui.plus</a>
-
-#### 🚧 安装 cnpm、yarn
-
-- 复制代码(桌面 cmd 运行) `npm install -g cnpm --registry=https://registry.npm.taobao.org`
-- 复制代码(桌面 cmd 运行) `npm install -g yarn`
+fork   https://github.com/zhontai/admin.ui.plus
 
 #### 🏭 环境支持
 
@@ -45,7 +31,6 @@
 
 #### ⚡ 使用说明
 
-建议使用 cnpm，因为 yarn 有时会报错。<a href="http://nodejs.cn/" target="_blank">node 版本 > 14.18+/16+</a>
 
 > Vite 不再支持 Node 12 / 13 / 15，因为上述版本已经进入了 EOL 阶段。现在你必须使用 Node 14.18+ / 16+ 版本。
 
@@ -57,28 +42,14 @@ git clone https://github.com/zhontai/admin.ui.plus/git
 cd admin.ui.plus
 
 # 安装依赖
-cnpm install
+pnpm install
 
 # 运行项目
-cnpm run dev
+pnpm run dev
 
 # 打包发布
-cnpm run build
+pnpm run build
 ```
-
-#### 📚 开发文档
-
-- 查看开发文档：<a href="https://www.zhontai.net" target="_blank">https://zhontai.net</a>
-
-#### 💯 学习交流加 QQ 群
-
-> 中台 admin 开发群（2000 人群）。
-
-- 中台 admin 开发群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=99e2f5cbf895d14aa61f4d038f3cfcb4a778f69e04e529394ada1bb307e6ded4">1058693879</a>
-
-  <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=99e2f5cbf895d14aa61f4d038f3cfcb4a778f69e04e529394ada1bb307e6ded4">
-  	<img src="https://www.zhontai.net/imgs/qq-group-1058693879.png" width="220" height="220" alt="中台admin 开发群" title="中台admin 开发群"/>
-  </a>
 
 #### 💕 特别感谢
 
@@ -112,7 +83,3 @@ cnpm run build
 - <a href="https://github.com/jsplumb/jsplumb" target="_blank">jsplumb</a>
 - <a href="https://github.com/hxj9102/table2excel" target="_blank">js-table2excel</a>
 
-#### 💌 支持作者
-
-如果觉得框架不错，或者已经在使用了，希望你可以去 <a target="_blank" href="https://github.com/zhontai/admin.ui.plus">Github</a> 或者
-<a target="_blank" href="https://gitee.com/zhontai/admin.ui.plus">Gitee</a> 帮我点个 ⭐ Star，这将是对我极大的鼓励与支持。
